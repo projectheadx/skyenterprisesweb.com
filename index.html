@@ -342,7 +342,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     margin: 0;
     font-size: 12px;
 }
+/* Logo section and image size control */
+.logo {
+    max-width: 200px; /* Nee unga logo shape-ku yetha madhiri 180px-220px kulla fix panniko */
+    display: flex;
+    align-items: center;
+}
 
+.logo a img {
+    width: 100%;      /* Parent (logo div) width-a exceed panna vidaadhu */
+    height: auto;     /* Aspect ratio maintain aagum, logo amunguna madhiri irukaadhu */
+    display: block;
+    object-fit: contain;
+}
+
+/* Oru chinna responsive touch: Mobile-la logo innum konjam chinna panna */
+@media (max-width: 768px) {
+    .logo {
+        max-width: 150px;
+        margin-bottom: 15px; /* Mobile-la contact details kulla gappu kaaka */
+    }
+    
+    .header-flex-wrapper {
+        justify-content: center; /* Mobile-la ellam center-a varum */
+        flex-direction: column;
+    }
+}
 </style>
 
 
