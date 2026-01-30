@@ -161,7 +161,7 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto">
                                 <a href="index.html" class="nav-item nav-link">Home</a>
-                                <a href="about.html" class="nav-item nav-link active">About</a>
+                                <a href="about.html" class="nav-item nav-link">About</a>
                                 <a href="service.html" class="nav-item nav-link">Service</a>
                                <!-- <a href="team.html" class="nav-item nav-link">Team</a>
                                 <a href="portfolio.html" class="nav-item nav-link">Project</a>
@@ -172,7 +172,7 @@
                                         <a href="single.html" class="dropdown-item">Single Page</a>
                                     </div>
                                 </div>   -->
-                                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                <a href="contact.html" class="nav-item nav-link active">Contact</a>
                             </div>
                             <div class="ml-auto">
                                 <a class="btn" href="#">Get A Quote</a>
@@ -191,79 +191,147 @@
                         <div class="col-12">
                             <h2>Contact Us</h2>
                         </div>
-                        <div class="col-12">
-                            <a href="">Home</a>
-                            <a href="">Contact Us</a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
             <!-- Page Header End -->
 
 
-            <!-- Contact Start -->
-            <div class="contact wow fadeInUp">
-                <div class="container">
-                    <div class="section-header text-center">
-                        <p>Get In Touch</p>
-                        <h2>For Any Query</h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="contact-info">
-                                <div class="contact-item">
-                                    <i class="flaticon-address"></i>
-                                    <div class="contact-text">
-                                        <h2>Location</h2>
-                                        <p>123 Street, New York, USA</p>
-                                    </div>
-                                </div>
-                                <div class="contact-item">
-                                    <i class="flaticon-call"></i>
-                                    <div class="contact-text">
-                                        <h2>Phone</h2>
-                                        <p>+012 345 67890</p>
-                                    </div>
-                                </div>
-                                <div class="contact-item">
-                                    <i class="flaticon-send-mail"></i>
-                                    <div class="contact-text">
-                                        <h2>Email</h2>
-                                        <p>info@example.com</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="contact-form">
-                                <div id="success"></div>
-                                <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                                    <div class="control-group">
-                                        <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                                        <p class="help-block text-danger"></p>
-                                    </div>
-                                    <div class="control-group">
-                                        <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                                        <p class="help-block text-danger"></p>
-                                    </div>
-                                    <div class="control-group">
-                                        <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
-                                        <p class="help-block text-danger"></p>
-                                    </div>
-                                    <div class="control-group">
-                                        <textarea class="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                                        <p class="help-block text-danger"></p>
-                                    </div>
-                                    <div>
-                                        <button class="btn" type="submit" id="sendMessageButton">Send Message</button>
-                                    </div>
-                                </form>
-                            </div>
+           <!-- Contact Start -->
+<div class="contact wow fadeInUp">
+    <div class="container">
+        <div class="section-header text-center">
+            <p>Get In Touch</p>
+            <h2>Contact Sky Enterprises</h2>
+        </div>
+
+        <div class="row">
+
+            <!-- Contact Info -->
+            <div class="col-md-6">
+                <div class="contact-info">
+
+                    <div class="contact-item">
+                        <i class="flaticon-address"></i>
+                        <div class="contact-text">
+                            <h2>Location</h2>
+                            <p>
+                                No. 267, Getnamallee,<br>
+                                Sirupuzhalpettai Post,<br>
+                                Gummidipoondi,<br>
+                                Tiruvallur – 601201
+                            </p>
                         </div>
                     </div>
+
+                    <div class="contact-item">
+                        <i class="flaticon-call"></i>
+                        <div class="contact-text">
+                            <h2>Call Us</h2>
+                            <p>+91 73739 19373</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <i class="flaticon-send-mail"></i>
+                        <div class="contact-text">
+                            <h2>Email</h2>
+                            <p>skyenterprises4207@gmail.com</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <!-- Contact End -->
+
+            <!-- Contact Form -->
+            <div class="col-md-6">
+                <div class="contact-form">
+
+                    <!-- WhatsApp Form -->
+                    <form onsubmit="sendWhatsApp(); return false;">
+
+                        <div class="control-group">
+                            <input type="text" class="form-control" id="name"
+                                   placeholder="Your Name" required />
+                        </div>
+
+                        <div class="control-group">
+                            <input type="tel" class="form-control" id="mobile"
+                                   placeholder="Mobile Number" required />
+                        </div>
+
+                        <div class="control-group">
+                            <select class="form-control" id="material" required>
+                                <option value="">Select Material</option>
+                                <option>Jalli</option>
+                                <option>M-Sand</option>
+                                <option>River Sand</option>
+                                <option>Ground Filling Sand</option>
+                            </select>
+                        </div>
+
+                        <div class="control-group">
+                            <textarea class="form-control" id="message"
+                                      placeholder="Requirement Details (Quantity, Location etc.)"
+                                      rows="4"></textarea>
+                        </div>
+
+                        <div>
+                            <button class="btn" type="submit">
+                                Send via WhatsApp
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+
+<!-- Google Map Start -->
+<div class="map wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container-fluid p-0">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1940.7136990517074!2d80.08795!3d13.385841!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a4d7f84f0b84fdb%3A0xd787b7ed45751215!2sLakshmi%20Shell%20LLP%20-%20Unit%20II!5e0!3m2!1sen!2sus!4v1769795120773!5m2!1sen!2sus""
+            width="100%" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</div>
+<!-- Google Map End -->
+
+
+
+
+
+
+<script>
+function sendWhatsApp(){
+    var name = document.getElementById("name").value;
+    var mobile = document.getElementById("mobile").value;
+    var material = document.getElementById("material").value;
+    var message = document.getElementById("message").value;
+
+    var text = "Name: " + name +
+               "%0aMobile: " + mobile +
+               "%0aMaterial: " + material +
+               "%0aDetails: " + message;
+
+    var url = "https://wa.me/917373919373?text=" + text;
+    window.open(url, "_blank");
+}
+</script>
+
 
   <!-- Footer Start -->
 <div class="footer wow fadeIn" data-wow-delay="0.3s">

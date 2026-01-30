@@ -160,8 +160,8 @@
 
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto">
-                                <a href="index.html" class="nav-item nav-link">Home</a>
-                                <a href="about.html" class="nav-item nav-link active">About</a>
+                                <a href="index.html" class="nav-item nav-link active">Home</a>
+                                <a href="about.html" class="nav-item nav-link">About</a>
                                 <a href="service.html" class="nav-item nav-link">Service</a>
                                <!-- <a href="team.html" class="nav-item nav-link">Team</a>
                                 <a href="portfolio.html" class="nav-item nav-link">Project</a>
@@ -318,7 +318,7 @@
                         Customer satisfaction and on-time supply are our top priorities.
                     </p>
 
-                    <a class="btn" href="#contact">Contact Us</a>
+                    <a class="btn" href="contact.html">Contact Us</a>
                 </div>
             </div>
 
@@ -970,11 +970,6 @@
           
 
 
-<a href="https://wa.me/917373919373" target="_blank"
-   style="position:fixed;bottom:20px;right:20px;z-index:999;">
-   <img src="https://img.icons8.com/color/96/000000/whatsapp.png"
-        width="60" alt="WhatsApp">
-</a>
 
 
 
@@ -1285,6 +1280,67 @@
 
 </div>
 <!-- Price CTA End -->
+
+
+
+
+<!-- WhatsApp Floating Button with Wave -->
+<a href="https://wa.me/917373919373" target="_blank" class="whatsapp-float">
+    <span class="wave"></span>
+    <span class="wave wave2"></span>
+    <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WhatsApp">
+</a>
+
+<style>
+.whatsapp-float{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:70px;
+    height:70px;
+    z-index:999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.whatsapp-float img{
+    width:60px;
+    height:60px;
+    z-index:3;
+}
+
+/* Wave effect */
+.wave{
+    position:absolute;
+    width:70px;
+    height:70px;
+    background:#25D366;
+    border-radius:50%;
+    animation: wave 2.5s infinite;
+    opacity:0.6;
+}
+
+.wave2{
+    animation-delay:1.2s;
+    opacity:0.4;
+}
+
+@keyframes wave{
+    0%{
+        transform:scale(1);
+        opacity:0.6;
+    }
+    100%{
+        transform:scale(2.4);
+        opacity:0;
+    }
+}
+</style>
+
+
+
+
 
 
 
