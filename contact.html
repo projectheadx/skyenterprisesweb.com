@@ -251,48 +251,101 @@
            
 
             <!-- Contact Form -->
-            <div class="col-md-6">
-                <div class="contact-form">
+         <div class="col-md-6">
 
-                    <!-- WhatsApp Form -->
-                    <form onsubmit="sendWhatsApp(); return false;">
+    <div class="contact-form">
 
-                        <div class="control-group">
-                            <input type="text" class="form-control" id="name"
-                                   placeholder="Your Name" required />
-                        </div>
+        <style>
+        /* FORCE textbox border */
+        .contact-form .form-control,
+        .contact-form textarea,
+        .contact-form select {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 2px solid #999 !important;   /* <-- BORDER FIX */
+            border-radius: 6px;
+        }
 
-                        <div class="control-group">
-                            <input type="tel" class="form-control" id="mobile"
-                                   placeholder="Mobile Number" required />
-                        </div>
+        /* Placeholder black */
+        .contact-form .form-control::placeholder,
+        .contact-form textarea::placeholder {
+            color: #000000 !important;
+            opacity: 1;
+        }
 
-                        <div class="control-group">
-                            <select class="form-control" id="material" required>
-                                <option value="">Select Material</option>
-                                <option>Jalli</option>
-                                <option>M-Sand</option>
-                                <option>River Sand</option>
-                                <option>Ground Filling Sand</option>
-                            </select>
-                        </div>
+        .contact-form .form-control::-webkit-input-placeholder {
+            color: #000000 !important;
+        }
 
-                        <div class="control-group">
-                            <textarea class="form-control" id="message"
-                                      placeholder="Requirement Details (Quantity, Location etc.)"
-                                      rows="4"></textarea>
-                        </div>
+        .contact-form .form-control::-moz-placeholder {
+            color: #000000 !important;
+        }
 
-                        <div>
-                            <button class="btn" type="submit">
-                                Send via WhatsApp
-                            </button>
-                        </div>
+        .contact-form .form-control:-ms-input-placeholder {
+            color: #000000 !important;
+        }
 
-                    </form>
+        .contact-form .form-control::-ms-input-placeholder {
+            color: #000000 !important;
+        }
 
-                </div>
+        /* Select fix */
+        .contact-form select,
+        .contact-form select option {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        /* Focus state */
+        .contact-form .form-control:focus {
+            border-color: #ff6600 !important;
+            box-shadow: 0 0 0 0.15rem rgba(255,102,0,0.25);
+            outline: none;
+        }
+
+        /* Space between inputs */
+        .contact-form .control-group {
+            margin-bottom: 15px;
+        }
+        </style>
+
+        <form onsubmit="sendWhatsApp(); return false;">
+
+            <div class="control-group">
+                <input type="text" class="form-control" id="name" placeholder="Your Name" required>
             </div>
+
+            <div class="control-group">
+                <input type="tel" class="form-control" id="mobile" placeholder="Mobile Number" required>
+            </div>
+
+            <div class="control-group">
+                <select class="form-control" id="material" required>
+                    <option value="">Select Material</option>
+                    <option>Jalli</option>
+                    <option>M-Sand</option>
+                    <option>River Sand</option>
+                    <option>Ground Filling Sand</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <textarea class="form-control" id="message"
+                    placeholder="Requirement Details (Quantity, Location etc.)"
+                    rows="4"></textarea>
+            </div>
+
+            <div>
+                <button class="btn" type="submit">
+                    Send via WhatsApp
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
 
         </div>
     </div>
