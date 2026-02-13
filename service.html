@@ -34,125 +34,129 @@
     <body>
         <div class="wrapper">
             <!-- Top Bar Start -->
-<div class="top-bar">
+            <div class="top-bar">
 
-    <!-- INLINE STYLE : ONLY FOR TOP BAR -->
-    <style>
-        .logo a{
-            display:flex;
-            align-items:center;
-            gap:12px;
-            text-decoration:none;
-        }
+                <!-- INLINE STYLE : ONLY FOR TOP BAR -->
+                <style>
+                    .logo a {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        text-decoration: none;
+                    }
 
-        .logo img{
-            max-height:60px;
-        }
+                    .logo img {
+                        max-height: 60px;
+                    }
 
-        .logo-text{
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            font-size:18px;
-            font-weight:700;
-            color:#000000;
-            line-height:1.1;
-            white-space:nowrap;
-            animation: slideFade 1.8s ease-out forwards;
-        }
+                    .logo-text {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        font-size: 18px;
+                        font-weight: 700;
+                        color: #000000;
+                        line-height: 1.1;
+                        white-space: nowrap;
+                        animation: slideFade 1.8s ease-out forwards;
+                    }
 
-        .logo-text small{
-            font-size:8px;
-            font-weight:300;
-            color:#222;
-        }
+                        .logo-text small {
+                            font-size: 8px;
+                            font-weight: 300;
+                            color: #222;
+                        }
 
-        @keyframes slideFade{
-            from{
-                opacity:0;
-                transform:translateX(20px);
-            }
-            to{
-                opacity:1;
-                transform:translateX(0);
-            }
-        }
+                    @keyframes slideFade {
+                        from {
+                            opacity: 0;
+                            transform: translateX(20px);
+                        }
 
-        @media(max-width:992px){
-            .logo-text{
-                font-size:18px;
-            }
-        }
-    </style>
+                        to {
+                            opacity: 1;
+                            transform: translateX(0);
+                        }
+                    }
 
-    <div class="container-fluid">
-        <div class="row align-items-center">
+                    @media(max-width:992px) {
+                        .logo-text {
+                            font-size: 18px;
+                        }
+                    }
+                </style>
 
-            <!-- LOGO + ANIMATED NAME -->
-            <div class="col-lg-3 col-md-12">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="img/logo.png" alt="Logo">
-                        <span class="logo-text">
-                            SKY ENTERPRISES
-                           <!-- <small>Jalli � M-Sand � River Sand � Filling Sand</small>-->
-                        </span>
-                    </a>
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+
+                        <!-- LOGO + ANIMATED NAME -->
+                        <div class="col-lg-3 col-md-12">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="Logo">
+                                    <span class="logo-text">
+                                        SKY ENTERPRISES
+                                        <!-- <small>Jalli � M-Sand � River Sand � Filling Sand</small>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT SIDE INFO -->
+                        <div class="col-lg-8 col-md-7 d-none d-lg-block">
+                            <div class="row">
+
+                                <!-- Email -->
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class=""></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Email Us</h3>
+                                            <p>munusamy@skyenterprisesweb.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                                <!-- GST -->
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>GST</h3>
+                                            <p>33DBYPM6097M1ZJ</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Call -->
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-call"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Call Us</h3>
+                                            <p>+91 73739 19373</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-
-            <!-- RIGHT SIDE INFO -->
-            <div class="col-lg-8 col-md-7 d-none d-lg-block">
-                <div class="row">
-
-                    <!-- Email -->
-                    <div class="col-4">
-                        <div class="top-bar-item">
-                            <div class="top-bar-icon">
-                                <i class="flaticon-calendar"></i>
-                            </div>
-                            <div class="top-bar-text">
-                                <h3>Email Us</h3>
-                                <p>munusamy@skyenterprisesweb.com</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- GST -->
-                    <div class="col-4">
-                        <div class="top-bar-item">
-                            <div class="top-bar-icon">
-                                <i class="flaticon-calendar"></i>
-                            </div>
-                            <div class="top-bar-text">
-                                <h3>GST</h3>
-                                <p>33DBYPM6097M1ZJ</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Call -->
-                    <div class="col-4">
-                        <div class="top-bar-item">
-                            <div class="top-bar-icon">
-                                <i class="flaticon-call"></i>
-                            </div>
-                            <div class="top-bar-text">
-                                <h3>Call Us</h3>
-                                <p>+91 73739 19373</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- Top Bar End -->
-
-           
+            <!-- Top Bar End -->
             <!-- Nav Bar Start -->
             <div class="nav-bar">
                 <div class="container-fluid">
@@ -168,14 +172,14 @@
                                 <a href="about.html" class="nav-item nav-link">About</a>
                                 <a href="service.html" class="nav-item nav-link active">Service</a>
                                 <!-- <a href="team.html" class="nav-item nav-link">Team</a>
-     <a href="portfolio.html" class="nav-item nav-link">Project</a>
-     <div class="nav-item dropdown">
-         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-         <div class="dropdown-menu">
-             <a href="blog.html" class="dropdown-item">Blog Page</a>
-             <a href="single.html" class="dropdown-item">Single Page</a>
-         </div>
-     </div>   -->
+                        <a href="portfolio.html" class="nav-item nav-link">Project</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                            <div class="dropdown-menu">
+                                <a href="blog.html" class="dropdown-item">Blog Page</a>
+                                <a href="single.html" class="dropdown-item">Single Page</a>
+                            </div>
+                        </div>   -->
                                 <a href="Pricing.html" class="nav-item nav-link">Pricing</a>
                                 <a href="contact.html" class="nav-item nav-link">Contact</a>
                             </div>
@@ -187,8 +191,6 @@
                 </div>
             </div>
             <!-- Nav Bar End -->
-            
-            
             <!-- Page Header Start -->
             <div class="page-header">
                 <div class="container">
@@ -196,396 +198,388 @@
                         <div class="col-12">
                             <h2>Our Services</h2>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
             <!-- Page Header End -->
-
-
-           <!-- Service Start -->
-           <div class="service">
-    <div class="container">
-        <div class="section-header text-center">
-            <p>Our Services</p>
-            <h2>Construction Material Supply</h2>
-        </div>
-
-        <div class="row">
-
-            <!-- Service 1 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item">
-                    <div class="service-img">
-                        <img src="img/service-1.jpg" alt="Jalli Supply">
-                        <div class="service-overlay">
-                            <p>
-                                We supply high quality jelly stones in various sizes suitable for house, commercial and road construction works.
-                            </p>
-                        </div>
+            <!-- Service Start -->
+            <div class="service">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <p>Our Services</p>
+                        <h2>Construction Material Supply</h2>
                     </div>
-                    <div class="service-text">
-                        <h3>Jalli Supply</h3>
-                        <a class="btn" href="img/service-1.jpg" data-lightbox="service">+</a>
+
+                    <div class="row">
+
+                        <!-- Service 1 -->
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="service-item">
+                                <div class="service-img">
+                                    <img src="img/service-1.jpg" alt="Jalli Supply">
+                                    <div class="service-overlay">
+                                        <p>
+                                            We supply high quality jelly stones in various sizes suitable for house, commercial and road construction works.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-text">
+                                    <h3>Jalli Supply</h3>
+                                    <a class="btn" href="img/service-1.jpg" data-lightbox="service">+</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Service 2 -->
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="service-item">
+                                <div class="service-img">
+                                    <img src="img/service-2.jpg" alt="River Sand Supply">
+                                    <div class="service-overlay">
+                                        <p>
+                                            Best quality river sand supplied for plastering and construction with proper grading and cleanliness.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-text">
+                                    <h3>River Sand Supply</h3>
+                                    <a class="btn" href="img/service-2.jpg" data-lightbox="service">+</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Service 3 -->
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="service-item">
+                                <div class="service-img">
+                                    <img src="img/service-3.jpg" alt="M-Sand Supply">
+                                    <div class="service-overlay">
+                                        <p>
+                                            High strength and eco-friendly M-Sand supplied for RCC, plastering and all construction needs.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-text">
+                                    <h3>M-Sand Supply</h3>
+                                    <a class="btn" href="img/service-3.jpg" data-lightbox="service">+</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Service 4 -->
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="service-item">
+                                <div class="service-img">
+                                    <img src="img/service-4.jpg" alt="Ground Filling Sand">
+                                    <div class="service-overlay">
+                                        <p>
+                                            Ground filling sand supplied for land filling, leveling and foundation preparation works.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-text">
+                                    <h3>Ground Filling Sand</h3>
+                                    <a class="btn" href="img/service-4.jpg" data-lightbox="service">+</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Service 5 -->
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="service-item">
+                                <div class="service-img">
+                                    <img src="img/service-5.jpg" alt="Bulk Supply">
+                                    <div class="service-overlay">
+                                        <p>
+                                            Bulk supply available for builders, contractors and large-scale construction projects.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-text">
+                                    <h3>Bulk Material Supply</h3>
+                                    <a class="btn" href="img/service-5.jpg" data-lightbox="service">+</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Service 6 -->
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                            <div class="service-item">
+                                <div class="service-img">
+                                    <img src="img/service-6.jpg" alt="Lorry Delivery">
+                                    <div class="service-overlay">
+                                        <p>
+                                            Fast and reliable lorry delivery to construction sites with on-time and safe unloading.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="service-text">
+                                    <h3>Lorry Delivery Service</h3>
+                                    <a class="btn" href="img/service-6.jpg" data-lightbox="service">+</a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-
-            <!-- Service 2 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
-                <div class="service-item">
-                    <div class="service-img">
-                        <img src="img/service-2.jpg" alt="River Sand Supply">
-                        <div class="service-overlay">
-                            <p>
-                                Best quality river sand supplied for plastering and construction with proper grading and cleanliness.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="service-text">
-                        <h3>River Sand Supply</h3>
-                        <a class="btn" href="img/service-2.jpg" data-lightbox="service">+</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 3 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item">
-                    <div class="service-img">
-                        <img src="img/service-3.jpg" alt="M-Sand Supply">
-                        <div class="service-overlay">
-                            <p>
-                                High strength and eco-friendly M-Sand supplied for RCC, plastering and all construction needs.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="service-text">
-                        <h3>M-Sand Supply</h3>
-                        <a class="btn" href="img/service-3.jpg" data-lightbox="service">+</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 4 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
-                <div class="service-item">
-                    <div class="service-img">
-                        <img src="img/service-4.jpg" alt="Ground Filling Sand">
-                        <div class="service-overlay">
-                            <p>
-                                Ground filling sand supplied for land filling, leveling and foundation preparation works.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="service-text">
-                        <h3>Ground Filling Sand</h3>
-                        <a class="btn" href="img/service-4.jpg" data-lightbox="service">+</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 5 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item">
-                    <div class="service-img">
-                        <img src="img/service-5.jpg" alt="Bulk Supply">
-                        <div class="service-overlay">
-                            <p>
-                                Bulk supply available for builders, contractors and large-scale construction projects.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="service-text">
-                        <h3>Bulk Material Supply</h3>
-                        <a class="btn" href="img/service-5.jpg" data-lightbox="service">+</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 6 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
-                <div class="service-item">
-                    <div class="service-img">
-                        <img src="img/service-6.jpg" alt="Lorry Delivery">
-                        <div class="service-overlay">
-                            <p>
-                                Fast and reliable lorry delivery to construction sites with on-time and safe unloading.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="service-text">
-                        <h3>Lorry Delivery Service</h3>
-                        <a class="btn" href="img/service-6.jpg" data-lightbox="service">+</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
             <!-- Service End -->
-            
-            
-           <!-- FAQs Start -->
-<div class="faqs">
-    <div class="container">
-        <div class="section-header text-center">
-            <p>Frequently Asked Questions</p>
-            <h2>Service Related Queries</h2>
-        </div>
-
-        <div class="row">
-
-            <!-- LEFT FAQ -->
-            <div class="col-md-6">
-                <div id="accordion-1">
-
-                    <div class="card wow fadeInLeft" data-wow-delay="0.1s">
-                        <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" href="#collapseOne">
-                                What construction materials do you supply?
-                            </a>
-                        </div>
-                        <div id="collapseOne" class="collapse" data-parent="#accordion-1">
-                            <div class="card-body">
-                                We supply Jalli (jelly stones), M-Sand, River Sand and Ground Filling Sand for all types of construction works.
-                            </div>
-                        </div>
+            <!-- FAQs Start -->
+            <div class="faqs">
+                <div class="container">
+                    <div class="section-header text-center">
+                        <p>Frequently Asked Questions</p>
+                        <h2>Service Related Queries</h2>
                     </div>
 
-                    <div class="card wow fadeInLeft" data-wow-delay="0.2s">
-                        <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" href="#collapseTwo">
-                                Do you provide lorry delivery to site?
-                            </a>
-                        </div>
-                        <div id="collapseTwo" class="collapse" data-parent="#accordion-1">
-                            <div class="card-body">
-                                Yes, we provide fast and reliable lorry delivery directly to your construction site.
+                    <div class="row">
+
+                        <!-- LEFT FAQ -->
+                        <div class="col-md-6">
+                            <div id="accordion-1">
+
+                                <div class="card wow fadeInLeft" data-wow-delay="0.1s">
+                                    <div class="card-header">
+                                        <a class="card-link collapsed" data-toggle="collapse" href="#collapseOne">
+                                            What construction materials do you supply?
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" data-parent="#accordion-1">
+                                        <div class="card-body">
+                                            We supply Jalli (jelly stones), M-Sand, River Sand and Ground Filling Sand for all types of construction works.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card wow fadeInLeft" data-wow-delay="0.2s">
+                                    <div class="card-header">
+                                        <a class="card-link collapsed" data-toggle="collapse" href="#collapseTwo">
+                                            Do you provide lorry delivery to site?
+                                        </a>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" data-parent="#accordion-1">
+                                        <div class="card-body">
+                                            Yes, we provide fast and reliable lorry delivery directly to your construction site.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card wow fadeInLeft" data-wow-delay="0.3s">
+                                    <div class="card-header">
+                                        <a class="card-link collapsed" data-toggle="collapse" href="#collapseThree">
+                                            Is M-Sand suitable for house construction?
+                                        </a>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" data-parent="#accordion-1">
+                                        <div class="card-body">
+                                            Yes, our M-Sand is suitable for RCC, plastering and all house construction purposes.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card wow fadeInLeft" data-wow-delay="0.4s">
+                                    <div class="card-header">
+                                        <a class="card-link collapsed" data-toggle="collapse" href="#collapseFour">
+                                            Do you supply materials for small house projects?
+                                        </a>
+                                    </div>
+                                    <div id="collapseFour" class="collapse" data-parent="#accordion-1">
+                                        <div class="card-body">
+                                            Yes, we supply materials for both small individual houses and large construction projects.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card wow fadeInLeft" data-wow-delay="0.5s">
+                                    <div class="card-header">
+                                        <a class="card-link collapsed" data-toggle="collapse" href="#collapseFive">
+                                            How can I place an order?
+                                        </a>
+                                    </div>
+                                    <div id="collapseFive" class="collapse" data-parent="#accordion-1">
+                                        <div class="card-body">
+                                            You can place an order by calling us or sending your requirement via WhatsApp.
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
 
-                    <div class="card wow fadeInLeft" data-wow-delay="0.3s">
-                        <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" href="#collapseThree">
-                                Is M-Sand suitable for house construction?
-                            </a>
-                        </div>
-                        <div id="collapseThree" class="collapse" data-parent="#accordion-1">
-                            <div class="card-body">
-                                Yes, our M-Sand is suitable for RCC, plastering and all house construction purposes.
+                        <!-- RIGHT FAQ -->
+                        <div class="col-md-6">
+                            <div id="accordion-2">
+
+                                <div class="card wow fadeInRight" data-wow-delay="0.1s">
+                                    <div class="card-header">
+                                        <a class="card-link collapsed" data-toggle="collapse" href="#collapseSix">
+                                            Do you supply ground filling sand?
+                                        </a>
+                                    </div>
+                                    <div id="collapseSix" class="collapse" data-parent="#accordion-2">
+                                        <div class="card-body">
+                                            Yes, we supply ground filling sand for land filling, leveling and foundation works.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card wow fadeInRight" data-wow-delay="0.2s">
+                                    <div class="card-header">
+                                        <a class="card-link collapsed" data-toggle="collapse" href="#collapseSeven">
+                                            What areas do you serve?
+                                        </a>
+                                    </div>
+                                    <div id="collapseSeven" class="collapse" data-parent="#accordion-2">
+                                        <div class="card-body">
+                                            We serve Gummidipoondi, Tiruvallur district and nearby surrounding areas.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card wow fadeInRight" data-wow-delay="0.3s">
+                                    <div class="card-header">
+                                        <a class="card-link collapsed" data-toggle="collapse" href="#collapseEight">
+                                            Are your prices competitive?
+                                        </a>
+                                    </div>
+                                    <div id="collapseEight" class="collapse" data-parent="#accordion-2">
+                                        <div class="card-body">
+                                            Yes, we offer the best market price with assured quality and correct quantity.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card wow fadeInRight" data-wow-delay="0.4s">
+                                    <div class="card-header">
+                                        <a class="card-link collapsed" data-toggle="collapse" href="#collapseNine">
+                                            Can I order materials in bulk?
+                                        </a>
+                                    </div>
+                                    <div id="collapseNine" class="collapse" data-parent="#accordion-2">
+                                        <div class="card-body">
+                                            Bulk orders are accepted for builders, contractors and large construction projects.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card wow fadeInRight" data-wow-delay="0.5s">
+                                    <div class="card-header">
+                                        <a class="card-link collapsed" data-toggle="collapse" href="#collapseTen">
+                                            Do you provide same-day delivery?
+                                        </a>
+                                    </div>
+                                    <div id="collapseTen" class="collapse" data-parent="#accordion-2">
+                                        <div class="card-body">
+                                            Same-day or next-day delivery is available based on order quantity and location.
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
 
-                    <div class="card wow fadeInLeft" data-wow-delay="0.4s">
-                        <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" href="#collapseFour">
-                                Do you supply materials for small house projects?
-                            </a>
-                        </div>
-                        <div id="collapseFour" class="collapse" data-parent="#accordion-1">
-                            <div class="card-body">
-                                Yes, we supply materials for both small individual houses and large construction projects.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card wow fadeInLeft" data-wow-delay="0.5s">
-                        <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" href="#collapseFive">
-                                How can I place an order?
-                            </a>
-                        </div>
-                        <div id="collapseFive" class="collapse" data-parent="#accordion-1">
-                            <div class="card-body">
-                                You can place an order by calling us or sending your requirement via WhatsApp.
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- RIGHT FAQ -->
-            <div class="col-md-6">
-                <div id="accordion-2">
-
-                    <div class="card wow fadeInRight" data-wow-delay="0.1s">
-                        <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" href="#collapseSix">
-                                Do you supply ground filling sand?
-                            </a>
-                        </div>
-                        <div id="collapseSix" class="collapse" data-parent="#accordion-2">
-                            <div class="card-body">
-                                Yes, we supply ground filling sand for land filling, leveling and foundation works.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card wow fadeInRight" data-wow-delay="0.2s">
-                        <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" href="#collapseSeven">
-                                What areas do you serve?
-                            </a>
-                        </div>
-                        <div id="collapseSeven" class="collapse" data-parent="#accordion-2">
-                            <div class="card-body">
-                                We serve Gummidipoondi, Tiruvallur district and nearby surrounding areas.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card wow fadeInRight" data-wow-delay="0.3s">
-                        <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" href="#collapseEight">
-                                Are your prices competitive?
-                            </a>
-                        </div>
-                        <div id="collapseEight" class="collapse" data-parent="#accordion-2">
-                            <div class="card-body">
-                                Yes, we offer the best market price with assured quality and correct quantity.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card wow fadeInRight" data-wow-delay="0.4s">
-                        <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" href="#collapseNine">
-                                Can I order materials in bulk?
-                            </a>
-                        </div>
-                        <div id="collapseNine" class="collapse" data-parent="#accordion-2">
-                            <div class="card-body">
-                                Bulk orders are accepted for builders, contractors and large construction projects.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card wow fadeInRight" data-wow-delay="0.5s">
-                        <div class="card-header">
-                            <a class="card-link collapsed" data-toggle="collapse" href="#collapseTen">
-                                Do you provide same-day delivery?
-                            </a>
-                        </div>
-                        <div id="collapseTen" class="collapse" data-parent="#accordion-2">
-                            <div class="card-body">
-                                Same-day or next-day delivery is available based on order quantity and location.
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- FAQs End -->
-
-
-
-
-          <!-- Footer Start -->
-<div class="footer wow fadeIn" data-wow-delay="0.3s">
-    <div class="container">
-        <div class="row">
-
-            <!-- Office Contact -->
-            <div class="col-md-6 col-lg-3">
-                <div class="footer-contact">
-                    <h2>Office Contact</h2>
-                    <p>
-                        <i class="fa fa-map-marker-alt"></i>
-                        K,S. Road<br>
-                        Kavaraipettai<br>
-                        Gummidipoondi TK,<br>
-                        Tiruvallur DT 601206
-                        Near TJS Petrol Bunk
-                    </p>
-                    <p><i class="fa fa-phone-alt"></i>+91 73739 19373</p>
-                    <p><i class="fa fa-phone-alt"></i>+91 90852 62728</p>
-                    <p><i class="fa fa-envelope"></i>skyenterprises2407@gmail.com</p>
-                    <p><strong>GST:</strong> 33DBYPM6097M1ZJ</p>
-
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="https://wa.me/917373919373" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
                     </div>
                 </div>
             </div>
+            <!-- FAQs End -->
+            <!-- Footer Start -->
+            <div class="footer wow fadeIn" data-wow-delay="0.3s">
+                <div class="container">
+                    <div class="row">
 
-            <!-- Services -->
-            <div class="col-md-6 col-lg-3">
-                <div class="footer-link">
-                    <h2>Our Services</h2>
-                    <a href="#">Jalli Supply</a>
-                    <a href="#">River Sand Supply</a>
-                    <a href="#">M-Sand Supply</a>
-                    <a href="#">Ground Filling Sand</a>
-                    <a href="#">Lorry Delivery Service</a>
+                        <!-- Office Contact -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="footer-contact">
+                                <h2>Office Contact</h2>
+                                <p>
+                                    <i class="fa fa-map-marker-alt"></i>
+                                    K,S. Road<br>
+                                    Kavaraipettai<br>
+                                    Gummidipoondi TK,<br>
+                                    Tiruvallur DT 601206
+                                    Near TJS Petrol Bunk
+                                </p>
+                                <p><i class="fa fa-phone-alt"></i>+91 73739 19373</p>
+                                <p><i class="fa fa-phone-alt"></i>+91 90852 62728</p>
+                                <p><i class="fa fa-envelope"></i>skyenterprises2407@gmail.com</p>
+                                <p><strong>GST:</strong> 33DBYPM6097M1ZJ</p>
+
+                                <div class="footer-social">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://wa.me/917373919373" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Services -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="footer-link">
+                                <h2>Our Services</h2>
+                                <a href="#">Jalli Supply</a>
+                                <a href="#">River Sand Supply</a>
+                                <a href="#">M-Sand Supply</a>
+                                <a href="#">Ground Filling Sand</a>
+                                <a href="#">Lorry Delivery Service</a>
+                            </div>
+                        </div>
+
+                        <!-- Useful Pages -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="footer-link">
+                                <h2>Useful Pages</h2>
+                                <a href="#about">About Us</a>
+                                <a href="#service">Our Services</a>
+                                <a href="#contact">Contact Us</a>
+                                <a href="#faqs">FAQs</a>
+                                <a href="#testimonial">Testimonials</a>
+                            </div>
+                        </div>
+
+                        <!-- Newsletter / CTA -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="newsletter">
+                                <h2>Quick Enquiry</h2>
+                                <p>
+                                    Call or WhatsApp us today for best price and fast delivery of construction materials.
+                                </p>
+                                <div class="form">
+                                    <a href="https://wa.me/917373919373" target="_blank" class="btn btn-block">
+                                        WhatsApp Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
 
-            <!-- Useful Pages -->
-            <div class="col-md-6 col-lg-3">
-                <div class="footer-link">
-                    <h2>Useful Pages</h2>
-                    <a href="#about">About Us</a>
-                    <a href="#service">Our Services</a>
-                    <a href="#contact">Contact Us</a>
-                    <a href="#faqs">FAQs</a>
-                    <a href="#testimonial">Testimonials</a>
-                </div>
-            </div>
-
-            <!-- Newsletter / CTA -->
-            <div class="col-md-6 col-lg-3">
-                <div class="newsletter">
-                    <h2>Quick Enquiry</h2>
-                    <p>
-                        Call or WhatsApp us today for best price and fast delivery of construction materials.
-                    </p>
-                    <div class="form">
-                        <a href="https://wa.me/917373919373" target="_blank" class="btn btn-block">
-                            WhatsApp Now
-                        </a>
+                <!-- Footer Menu -->
+                <!--   <div class="container footer-menu">
+               <div class="f-menu">
+                   <a href="#">Terms of Use</a>
+                   <a href="#">Privacy Policy</a>
+                   <a href="#">Help</a>
+                   <a href="#faqs">FAQs</a>
+               </div>
+           </div> -->
+                <!-- Copyright -->
+                <div class="container copyright">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>&copy; <a href="#">Sky Enterprises</a>, All Rights Reserved.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Construction Material Supplier</p>
+                        </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-    </div>
-
-    <!-- Footer Menu -->
-    <!--   <div class="container footer-menu">
-           <div class="f-menu">
-               <a href="#">Terms of Use</a>
-               <a href="#">Privacy Policy</a>
-               <a href="#">Help</a>
-               <a href="#faqs">FAQs</a>
-           </div>
-       </div> -->
-    <!-- Copyright -->
-    <div class="container copyright">
-        <div class="row">
-            <div class="col-md-6">
-                <p>&copy; <a href="#">Sky Enterprises</a>, All Rights Reserved.</p>
-            </div>
-            <div class="col-md-6">
-                <p>Construction Material Supplier</p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Footer End -->
+            <!-- Footer End -->
 
             <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
         </div>

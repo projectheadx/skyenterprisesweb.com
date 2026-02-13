@@ -33,125 +33,130 @@
 
     <body>
         <div class="wrapper">
-           <!-- Top Bar Start -->
-<div class="top-bar">
+            <!-- Top Bar Start -->
+            <div class="top-bar">
 
-    <!-- INLINE STYLE : ONLY FOR TOP BAR -->
-    <style>
-        .logo a{
-            display:flex;
-            align-items:center;
-            gap:12px;
-            text-decoration:none;
-        }
+                <!-- INLINE STYLE : ONLY FOR TOP BAR -->
+                <style>
+                    .logo a {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        text-decoration: none;
+                    }
 
-        .logo img{
-            max-height:60px;
-        }
+                    .logo img {
+                        max-height: 60px;
+                    }
 
-        .logo-text{
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            font-size:18px;
-            font-weight:700;
-            color:#000000;
-            line-height:1.1;
-            white-space:nowrap;
-            animation: slideFade 1.8s ease-out forwards;
-        }
+                    .logo-text {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        font-size: 18px;
+                        font-weight: 700;
+                        color: #000000;
+                        line-height: 1.1;
+                        white-space: nowrap;
+                        animation: slideFade 1.8s ease-out forwards;
+                    }
 
-        .logo-text small{
-            font-size:8px;
-            font-weight:300;
-            color:#222;
-        }
+                        .logo-text small {
+                            font-size: 8px;
+                            font-weight: 300;
+                            color: #222;
+                        }
 
-        @keyframes slideFade{
-            from{
-                opacity:0;
-                transform:translateX(20px);
-            }
-            to{
-                opacity:1;
-                transform:translateX(0);
-            }
-        }
+                    @keyframes slideFade {
+                        from {
+                            opacity: 0;
+                            transform: translateX(20px);
+                        }
 
-        @media(max-width:992px){
-            .logo-text{
-                font-size:18px;
-            }
-        }
-    </style>
+                        to {
+                            opacity: 1;
+                            transform: translateX(0);
+                        }
+                    }
 
-    <div class="container-fluid">
-        <div class="row align-items-center">
+                    @media(max-width:992px) {
+                        .logo-text {
+                            font-size: 18px;
+                        }
+                    }
+                </style>
 
-            <!-- LOGO + ANIMATED NAME -->
-            <div class="col-lg-3 col-md-12">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="img/logo.png" alt="Logo">
-                        <span class="logo-text">
-                            SKY ENTERPRISES
-                           <!-- <small>Jalli • M-Sand • River Sand • Filling Sand</small>-->
-                        </span>
-                    </a>
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+
+                        <!-- LOGO + ANIMATED NAME -->
+                        <div class="col-lg-3 col-md-12">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="img/logo.png" alt="Logo">
+                                    <span class="logo-text">
+                                        SKY ENTERPRISES
+                                        <!-- <small>Jalli • M-Sand • River Sand • Filling Sand</small>-->
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT SIDE INFO -->
+                        <div class="col-lg-8 col-md-7 d-none d-lg-block">
+                            <div class="row">
+
+                                <!-- Email -->
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class=""></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Email Us</h3>
+                                            <p>munusamy@skyenterprisesweb.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                                <!-- GST -->
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>GST</h3>
+                                            <p>33DBYPM6097M1ZJ</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Call -->
+                                <div class="col-4">
+                                    <div class="top-bar-item">
+                                        <div class="top-bar-icon">
+                                            <i class="flaticon-call"></i>
+                                        </div>
+                                        <div class="top-bar-text">
+                                            <h3>Call Us</h3>
+                                            <p>+91 73739 19373</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-
-            <!-- RIGHT SIDE INFO -->
-            <div class="col-lg-8 col-md-7 d-none d-lg-block">
-                <div class="row">
-
-                    <!-- Email -->
-                    <div class="col-4">
-                        <div class="top-bar-item">
-                            <div class="top-bar-icon">
-                                <i class="flaticon-calendar"></i>
-                            </div>
-                            <div class="top-bar-text">
-                                <h3>Email Us</h3>
-                                <p>munusamy@skyenterprisesweb.com</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- GST -->
-                    <div class="col-4">
-                        <div class="top-bar-item">
-                            <div class="top-bar-icon">
-                                <i class="flaticon-calendar"></i>
-                            </div>
-                            <div class="top-bar-text">
-                                <h3>GST</h3>
-                                <p>33DBYPM6097M1ZJ</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Call -->
-                    <div class="col-4">
-                        <div class="top-bar-item">
-                            <div class="top-bar-icon">
-                                <i class="flaticon-call"></i>
-                            </div>
-                            <div class="top-bar-text">
-                                <h3>Call Us</h3>
-                                <p>+91 73739 19373</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- Top Bar End -->
-
+            <!-- Top Bar End -->
             <!-- Nav Bar Start -->
             <div class="nav-bar">
                 <div class="container-fluid">
@@ -166,15 +171,15 @@
                                 <a href="index.html" class="nav-item nav-link">Home</a>
                                 <a href="about.html" class="nav-item nav-link">About</a>
                                 <a href="service.html" class="nav-item nav-link">Service</a>
-                               <!-- <a href="team.html" class="nav-item nav-link">Team</a>
-                                <a href="portfolio.html" class="nav-item nav-link">Project</a>
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                    <div class="dropdown-menu">
-                                        <a href="blog.html" class="dropdown-item">Blog Page</a>
-                                        <a href="single.html" class="dropdown-item">Single Page</a>
-                                    </div>
-                                </div>   -->
+                                <!-- <a href="team.html" class="nav-item nav-link">Team</a>
+                         <a href="portfolio.html" class="nav-item nav-link">Project</a>
+                         <div class="nav-item dropdown">
+                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                             <div class="dropdown-menu">
+                                 <a href="blog.html" class="dropdown-item">Blog Page</a>
+                                 <a href="single.html" class="dropdown-item">Single Page</a>
+                             </div>
+                         </div>   -->
                                 <a href="Pricing.html" class="nav-item nav-link  active">Pricing</a>
                                 <a href="contact.html" class="nav-item nav-link">Contact</a>
                             </div>
@@ -186,8 +191,6 @@
                 </div>
             </div>
             <!-- Nav Bar End -->
-            
-            
             <!-- Page Header Start -->
             <div class="page-header">
                 <div class="container">
@@ -195,300 +198,309 @@
                         <div class="col-12">
                             <h2>Pricing</h2>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
             <!-- Page Header End -->
+            <!-- Pricing Section Start -->
+            <div class="pricing wow fadeInUp" data-wow-delay="0.1s">
 
+                <style>
+                    .pricing {
+                        background: #f8f9fa;
+                        padding: 60px 0;
+                    }
 
+                    .price-box {
+                        background: #ffffff;
+                        padding: 30px 20px;
+                        border-radius: 12px;
+                        text-align: center;
+                        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+                        transition: 0.3s;
+                        height: 100%;
+                    }
 
+                        .price-box:hover {
+                            transform: translateY(-8px);
+                        }
 
-         <!-- Pricing Section Start -->
-<div class="pricing wow fadeInUp" data-wow-delay="0.1s">
+                        .price-box h3 {
+                            font-size: 22px;
+                            font-weight: 700;
+                            margin-bottom: 12px;
+                        }
 
-<style>
-.pricing{
-    background:#f8f9fa;
-    padding:60px 0;
-}
-.price-box{
-    background:#ffffff;
-    padding:30px 20px;
-    border-radius:12px;
-    text-align:center;
-    box-shadow:0 6px 20px rgba(0,0,0,0.08);
-    transition:0.3s;
-    height:100%;
-}
-.price-box:hover{
-    transform:translateY(-8px);
-}
-.price-box h3{
-    font-size:22px;
-    font-weight:700;
-    margin-bottom:12px;
-}
+                    /* PRICE STYLES */
+                    .old-price {
+                        font-size: 18px;
+                        color: #999;
+                        text-decoration: line-through;
+                    }
 
-/* PRICE STYLES */
-.old-price{
-    font-size:18px;
-    color:#999;
-    text-decoration:line-through;
-}
-.new-price{
-    font-size:30px;
-    font-weight:800;
-    color:#ff6600;
-    margin:5px 0;
-}
-.price-unit{
-    font-size:14px;
-    color:#555;
-}
+                    .new-price {
+                        font-size: 30px;
+                        font-weight: 800;
+                        color: #ff6600;
+                        margin: 5px 0;
+                    }
 
-.price-box p{
-    font-size:14px;
-    color:#555;
-    line-height:1.5;
-}
+                    .price-unit {
+                        font-size: 14px;
+                        color: #555;
+                    }
 
-.price-btn{
-    display:inline-block;
-    margin-top:15px;
-    padding:10px 26px;
-    border-radius:30px;
-    background:#ff6600;
-    color:#fff;
-    font-weight:600;
-    text-decoration:none;
-}
-.price-btn:hover{
-    opacity:0.9;
-}
+                    .price-box p {
+                        font-size: 14px;
+                        color: #555;
+                        line-height: 1.5;
+                    }
 
-.note{
-    text-align:center;
-    margin-top:25px;
-    font-size:14px;
-    font-weight:600;
-}
+                    .price-btn {
+                        display: inline-block;
+                        margin-top: 15px;
+                        padding: 10px 26px;
+                        border-radius: 30px;
+                        background: #ff6600;
+                        color: #fff;
+                        font-weight: 600;
+                        text-decoration: none;
+                    }
 
-@media(max-width:768px){
-    .new-price{font-size:26px;}
-}
-</style>
+                        .price-btn:hover {
+                            opacity: 0.9;
+                        }
 
-<div class="container">
-    <div class="section-header text-center">
-        <p>Pricing</p>
-        <h2>Today’s Best Price</h2>
-    </div>
+                    .note {
+                        text-align: center;
+                        margin-top: 25px;
+                        font-size: 14px;
+                        font-weight: 600;
+                    }
 
-    <div class="row">
+                    @media(max-width:768px) {
+                        .new-price {
+                            font-size: 26px;
+                        }
+                    }
+                </style>
 
-        <!-- Jalli -->
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="price-box">
-                <h3>Jalli Supply</h3>
-                <div class="old-price">₹6,200</div>
-                <div class="new-price">₹4,950</div>
-                <div class="price-unit">per unit / load</div>
-                <p>High quality jalli for foundation & RCC works.</p>
-                <a href="https://wa.me/917373919373" target="_blank" class="price-btn">
-                    Book Now
-                </a>
+                <div class="container">
+                    <div class="section-header text-center">
+                        <p>Pricing</p>
+                        <h2>Today’s Best Price</h2>
+                    </div>
+
+                    <div class="row">
+
+                        <!-- Jalli -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="price-box">
+                                <h3>Jalli Supply</h3>
+                                <div class="old-price">₹6,200</div>
+                                <div class="new-price">₹4,950</div>
+                                <div class="price-unit">per unit / load</div>
+                                <p>High quality jalli for foundation & RCC works.</p>
+                                <a href="https://wa.me/917373919373" target="_blank" class="price-btn">
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- M-Sand -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="price-box">
+                                <h3>M-Sand</h3>
+
+                                <div class="old-price">₹6000</div>
+                                <div class="new-price">₹5000</div>
+                                <div class="price-unit">per unit / load</div>
+                                <p>Best for plastering & house construction.</p>
+                                <a href="https://wa.me/917373919373" target="_blank" class="price-btn">
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- River Sand -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="price-box">
+                                <h3>River Sand</h3>
+                                <div class="old-price">₹12,000</div>
+                                <div class="new-price">₹10,000</div>
+                                <div class="price-unit">per unit / load</div>
+                                <p>Clean river sand with proper grading.</p>
+                                <a href="https://wa.me/917373919373" target="_blank" class="price-btn">
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Filling Sand -->
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="price-box">
+                                <h3>Filling Sand</h3>
+                                <div class="old-price">₹5,800</div>
+                                <div class="new-price">₹4,500</div>
+                                <div class="price-unit">per unit / load</div>
+                                <p>Ideal for land filling & leveling works.</p>
+                                <a href="https://wa.me/917373919373" target="_blank" class="price-btn">
+                                    Book Now
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="note">
+                        ⚠ Prices may vary based on quantity, distance and availability.
+                        📞 Call / WhatsApp us for confirmation.
+                    </div>
+
+                </div>
             </div>
-        </div>
+            <!-- Pricing Section End -->
+            <!-- Quality Assurance Start -->
+            <div class="quality wow fadeInUp" data-wow-delay="0.1s">
 
-        <!-- M-Sand -->
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="price-box">
-                <h3>M-Sand</h3>6000</div>
-                <div class="new-price">₹5000</div>
-                <div class="price-unit">per unit / load</div>
-                <p>Best for plastering & house construction.</p>
-                <a href="https://wa.me/917373919373" target="_blank" class="price-btn">
-                    Book Now
-                </a>
+                <style>
+                    .quality {
+                        background: #ffffff;
+                        padding: 60px 0;
+                    }
+
+                    .quality-box {
+                        background: #f8f9fa;
+                        padding: 28px 22px;
+                        border-radius: 12px;
+                        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+                        transition: 0.3s;
+                        height: 100%;
+                    }
+
+                        .quality-box:hover {
+                            transform: translateY(-6px);
+                        }
+
+                    .quality-icon {
+                        font-size: 38px;
+                        color: #ff6600;
+                        margin-bottom: 12px;
+                    }
+
+                    .quality-box h3 {
+                        font-size: 20px;
+                        font-weight: 700;
+                        margin-bottom: 8px;
+                    }
+
+                    .quality-box p {
+                        font-size: 14px;
+                        color: #555;
+                        line-height: 1.5;
+                    }
+                </style>
+
+                <div class="container">
+                    <div class="section-header text-center">
+                        <p>Quality & Assurance</p>
+                        <h2>Why Our Materials Are Trusted</h2>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="quality-box text-center">
+                                <div class="quality-icon"><i class="flaticon-building"></i></div>
+                                <h3>Verified Sources</h3>
+                                <p>Materials sourced from reliable and approved suppliers only.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="quality-box text-center">
+                                <div class="quality-icon"><i class="flaticon-worker"></i></div>
+                                <h3>Quality Check</h3>
+                                <p>Every load checked for grading, cleanliness and consistency.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="quality-box text-center">
+                                <div class="quality-icon"><i class="flaticon-crane"></i></div>
+                                <h3>Correct Quantity</h3>
+                                <p>Assured quantity delivery without compromise or shortage.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="quality-box text-center">
+                                <div class="quality-icon"><i class="flaticon-call"></i></div>
+                                <h3>Customer Commitment</h3>
+                                <p>Transparent pricing and on-time delivery guaranteed.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
-        </div>
+            <!-- Quality Assurance End -->
+            <!-- WhatsApp Floating Button with Wave -->
+            <a href="https://wa.me/917373919373" target="_blank" class="whatsapp-float">
+                <span class="wave"></span>
+                <span class="wave wave2"></span>
+                <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WhatsApp">
+            </a>
 
-        <!-- River Sand -->
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="price-box">
-                <h3>River Sand</h3>
-                <div class="old-price">₹12,000</div>
-                <div class="new-price">₹10,000</div>
-                <div class="price-unit">per unit / load</div>
-                <p>Clean river sand with proper grading.</p>
-                <a href="https://wa.me/917373919373" target="_blank" class="price-btn">
-                    Book Now
-                </a>
-            </div>
-        </div>
+            <style>
+                .whatsapp-float {
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    width: 70px;
+                    height: 70px;
+                    z-index: 999;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
 
-        <!-- Filling Sand -->
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="price-box">
-                <h3>Filling Sand</h3>
-                <div class="old-price">₹5,800</div>
-                <div class="new-price">₹4,500</div>
-                <div class="price-unit">per unit / load</div>
-                <p>Ideal for land filling & leveling works.</p>
-                <a href="https://wa.me/917373919373" target="_blank" class="price-btn">
-                    Book Now
-                </a>
-            </div>
-        </div>
+                    .whatsapp-float img {
+                        width: 60px;
+                        height: 60px;
+                        z-index: 3;
+                    }
 
-    </div>
+                /* Wave effect */
+                .wave {
+                    position: absolute;
+                    width: 70px;
+                    height: 70px;
+                    background: #25D366;
+                    border-radius: 50%;
+                    animation: wave 2.5s infinite;
+                    opacity: 0.6;
+                }
 
-    <div class="note">
-        ⚠ Prices may vary based on quantity, distance and availability.  
-        📞 Call / WhatsApp us for confirmation.
-    </div>
+                .wave2 {
+                    animation-delay: 1.2s;
+                    opacity: 0.4;
+                }
 
-</div>
-</div>
-<!-- Pricing Section End -->
+                @keyframes wave {
+                    0% {
+                        transform: scale(1);
+                        opacity: 0.6;
+                    }
 
-
-<!-- Quality Assurance Start -->
-<div class="quality wow fadeInUp" data-wow-delay="0.1s">
-
-<style>
-.quality{
-    background:#ffffff;
-    padding:60px 0;
-}
-.quality-box{
-    background:#f8f9fa;
-    padding:28px 22px;
-    border-radius:12px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.08);
-    transition:0.3s;
-    height:100%;
-}
-.quality-box:hover{ transform:translateY(-6px); }
-.quality-icon{
-    font-size:38px;
-    color:#ff6600;
-    margin-bottom:12px;
-}
-.quality-box h3{
-    font-size:20px;
-    font-weight:700;
-    margin-bottom:8px;
-}
-.quality-box p{
-    font-size:14px;
-    color:#555;
-    line-height:1.5;
-}
-</style>
-
-<div class="container">
-    <div class="section-header text-center">
-        <p>Quality & Assurance</p>
-        <h2>Why Our Materials Are Trusted</h2>
-    </div>
-
-    <div class="row">
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="quality-box text-center">
-                <div class="quality-icon"><i class="flaticon-building"></i></div>
-                <h3>Verified Sources</h3>
-                <p>Materials sourced from reliable and approved suppliers only.</p>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="quality-box text-center">
-                <div class="quality-icon"><i class="flaticon-worker"></i></div>
-                <h3>Quality Check</h3>
-                <p>Every load checked for grading, cleanliness and consistency.</p>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="quality-box text-center">
-                <div class="quality-icon"><i class="flaticon-crane"></i></div>
-                <h3>Correct Quantity</h3>
-                <p>Assured quantity delivery without compromise or shortage.</p>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="quality-box text-center">
-                <div class="quality-icon"><i class="flaticon-call"></i></div>
-                <h3>Customer Commitment</h3>
-                <p>Transparent pricing and on-time delivery guaranteed.</p>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-</div>
-<!-- Quality Assurance End -->
-
-
-
-<!-- WhatsApp Floating Button with Wave -->
-<a href="https://wa.me/917373919373" target="_blank" class="whatsapp-float">
-    <span class="wave"></span>
-    <span class="wave wave2"></span>
-    <img src="https://img.icons8.com/color/96/000000/whatsapp.png" alt="WhatsApp">
-</a>
-
-<style>
-.whatsapp-float{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    width:70px;
-    height:70px;
-    z-index:999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.whatsapp-float img{
-    width:60px;
-    height:60px;
-    z-index:3;
-}
-
-/* Wave effect */
-.wave{
-    position:absolute;
-    width:70px;
-    height:70px;
-    background:#25D366;
-    border-radius:50%;
-    animation: wave 2.5s infinite;
-    opacity:0.6;
-}
-
-.wave2{
-    animation-delay:1.2s;
-    opacity:0.4;
-}
-
-@keyframes wave{
-    0%{
-        transform:scale(1);
-        opacity:0.6;
-    }
-    100%{
-        transform:scale(2.4);
-        opacity:0;
-    }
-}
-</style>
+                    100% {
+                        transform: scale(2.4);
+                        opacity: 0;
+                    }
+                }
+            </style>
 
 
 
@@ -498,102 +510,102 @@
 
 
             <!-- Footer Start -->
-<div class="footer wow fadeIn" data-wow-delay="0.3s">
-    <div class="container">
-        <div class="row">
+            <div class="footer wow fadeIn" data-wow-delay="0.3s">
+                <div class="container">
+                    <div class="row">
 
-            <!-- Office Contact -->
-            <div class="col-md-6 col-lg-3">
-                <div class="footer-contact">
-                    <h2>Office Contact</h2>
-                    <p>
-                        <i class="fa fa-map-marker-alt"></i>
-                        K,S. Road<br>
-                        Kavaraipettai<br>
-                        Gummidipoondi TK,<br>
-                        Tiruvallur DT 601206
-                        Near TJS Petrol Bunk
-                    </p>
-                    <p><i class="fa fa-phone-alt"></i>+91 73739 19373</p>
-                    <p><i class="fa fa-phone-alt"></i>+91 90852 62728</p>
-                    <p><i class="fa fa-envelope"></i>skyenterprises2407@gmail.com</p>
-                    <p><strong>GST:</strong> 33DBYPM6097M1ZJ</p>
+                        <!-- Office Contact -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="footer-contact">
+                                <h2>Office Contact</h2>
+                                <p>
+                                    <i class="fa fa-map-marker-alt"></i>
+                                    K,S. Road<br>
+                                    Kavaraipettai<br>
+                                    Gummidipoondi TK,<br>
+                                    Tiruvallur DT 601206
+                                    Near TJS Petrol Bunk
+                                </p>
+                                <p><i class="fa fa-phone-alt"></i>+91 73739 19373</p>
+                                <p><i class="fa fa-phone-alt"></i>+91 90852 62728</p>
+                                <p><i class="fa fa-envelope"></i>skyenterprises2407@gmail.com</p>
+                                <p><strong>GST:</strong> 33DBYPM6097M1ZJ</p>
 
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="https://wa.me/917373919373" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
+                                <div class="footer-social">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-youtube"></i></a>
+                                    <a href="https://wa.me/917373919373" target="_blank">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Services -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="footer-link">
+                                <h2>Our Services</h2>
+                                <a href="#">Jalli Supply</a>
+                                <a href="#">River Sand Supply</a>
+                                <a href="#">M-Sand Supply</a>
+                                <a href="#">Ground Filling Sand</a>
+                                <a href="#">Lorry Delivery Service</a>
+                            </div>
+                        </div>
+
+                        <!-- Useful Pages -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="footer-link">
+                                <h2>Useful Pages</h2>
+                                <a href="#about">About Us</a>
+                                <a href="#service">Our Services</a>
+                                <a href="#contact">Contact Us</a>
+                                <a href="#faqs">FAQs</a>
+                                <a href="#testimonial">Testimonials</a>
+                            </div>
+                        </div>
+
+                        <!-- Newsletter / CTA -->
+                        <div class="col-md-6 col-lg-3">
+                            <div class="newsletter">
+                                <h2>Quick Enquiry</h2>
+                                <p>
+                                    Call or WhatsApp us today for best price and fast delivery of construction materials.
+                                </p>
+                                <div class="form">
+                                    <a href="https://wa.me/917373919373" target="_blank" class="btn btn-block">
+                                        WhatsApp Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Footer Menu -->
+                <!--   <div class="container footer-menu">
+               <div class="f-menu">
+                   <a href="#">Terms of Use</a>
+                   <a href="#">Privacy Policy</a>
+                   <a href="#">Help</a>
+                   <a href="#faqs">FAQs</a>
+               </div>
+           </div> -->
+                <!-- Copyright -->
+                <div class="container copyright">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>&copy; <a href="#">Sky Enterprises</a>, All Rights Reserved.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Construction Material Supplier</p>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Services -->
-            <div class="col-md-6 col-lg-3">
-                <div class="footer-link">
-                    <h2>Our Services</h2>
-                    <a href="#">Jalli Supply</a>
-                    <a href="#">River Sand Supply</a>
-                    <a href="#">M-Sand Supply</a>
-                    <a href="#">Ground Filling Sand</a>
-                    <a href="#">Lorry Delivery Service</a>
-                </div>
-            </div>
-
-            <!-- Useful Pages -->
-            <div class="col-md-6 col-lg-3">
-                <div class="footer-link">
-                    <h2>Useful Pages</h2>
-                    <a href="#about">About Us</a>
-                    <a href="#service">Our Services</a>
-                    <a href="#contact">Contact Us</a>
-                    <a href="#faqs">FAQs</a>
-                    <a href="#testimonial">Testimonials</a>
-                </div>
-            </div>
-
-            <!-- Newsletter / CTA -->
-            <div class="col-md-6 col-lg-3">
-                <div class="newsletter">
-                    <h2>Quick Enquiry</h2>
-                    <p>
-                        Call or WhatsApp us today for best price and fast delivery of construction materials.
-                    </p>
-                    <div class="form">
-                        <a href="https://wa.me/917373919373" target="_blank" class="btn btn-block">
-                            WhatsApp Now
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Footer Menu -->
-    <!--   <div class="container footer-menu">
-           <div class="f-menu">
-               <a href="#">Terms of Use</a>
-               <a href="#">Privacy Policy</a>
-               <a href="#">Help</a>
-               <a href="#faqs">FAQs</a>
-           </div>
-       </div> -->
-    <!-- Copyright -->
-    <div class="container copyright">
-        <div class="row">
-            <div class="col-md-6">
-                <p>&copy; <a href="#">Sky Enterprises</a>, All Rights Reserved.</p>
-            </div>
-            <div class="col-md-6">
-                <p>Construction Material Supplier</p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Footer End -->
+            <!-- Footer End -->
 
             <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
         </div>
