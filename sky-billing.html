@@ -666,22 +666,31 @@ function exportToExcel() {
     btn.disabled = true;
     btn.innerText = "Saving...";
 
-    const invData = { 
-        type: "INVOICE", 
-        invNo: (5000 + invoiceHistory.length + 1), 
-        customer: document.getElementById('custName').value || "Walk-in", 
-        phone: document.getElementById('custPhone').value || "N/A", 
-        address: document.getElementById('custAddr').value || "N/A",
-        date: finalDate, 
-        subtotal: document.getElementById('lblSubtotal').innerText,
-        gstAmt: document.getElementById('lblGst').innerText, 
-        total: document.getElementById('lblGrandTotal').innerText,
-        items: currentBillItems 
-    };
 
-    try {
-        const response = await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(invData) });
-        generatePDF(invData);
+
+    // --- NEW INVOICE NUMBER FORMAT (SKY/001) ---
+const nextIndex = invoiceHistory.length + 1;
+const formattedInvNo = "SKY/" + nextIndex.toString().padStart(3, '0');
+
+const invData = { 
+    type: "INVOICE", 
+    invNo: formattedInvNo, // Ippo SKY/001 nu store aagum
+    customer: document.getElementById('custName').value || "Walk-in", 
+    phone: document.getElementById('custPhone').value || "N/A", 
+    address: document.getElementById('custAddr').value || "N/A",
+    date: finalDate, 
+    subtotal: document.getElementById('lblSubtotal').innerText,
+    gstAmt: document.getElementById('lblGst').innerText, 
+    total: document.getElementById('lblGrandTotal').innerText,
+    items: currentBillItems 
+};
+
+try {
+    const response = await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(invData) });
+    generatePDF(invData);
+    // ... rest of your code (reset inputs, loadDataFromSheets etc.)
+
+
         
         // Reset and Reload
         currentBillItems = []; 
