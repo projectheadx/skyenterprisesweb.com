@@ -577,31 +577,43 @@ function exportToExcel() {
 			renderHistory();
 		}
 
+		
+		
+		
+		
 		function renderHistory() {
-			const body = document.getElementById('historyBody');
-			const start = (currentPage - 1) * rowsPerPage;
-			const end = start + rowsPerPage;
-			const paginated = filteredHistory.slice().reverse().slice(start, end);
+    const body = document.getElementById('historyBody');
+    const start = (currentPage - 1) * rowsPerPage;
+    const paginated = filteredHistory.slice().reverse().slice(start, start + rowsPerPage);
 
-			if (paginated.length === 0) {
-				body.innerHTML = '<tr><td colspan="5" class="text-center">No Records Found</td></tr>';
-				document.getElementById('paginationControls').innerHTML = '';
-				document.getElementById('pageInfo').innerText = '';
-				return;
-			}
+    if (paginated.length === 0) {
+        body.innerHTML = '<tr><td colspan="5" class="text-center">No Records Found</td></tr>';
+        return;
+    }
 
-			body.innerHTML = paginated.map(h => `
-				<tr>
-					<td>#${h.invNo}</td>
-					<td><strong>${h.customer}</strong><br><small>${h.phone}</small></td>
-					<td>${h.date}</td>
-					<td class="fw-bold">₹${h.total}</td>
-					<td><button class="btn btn-sm btn-outline-primary" onclick="reprint(${h.invNo})">PDF</button></td>
-				</tr>
-			`).join('');
+    body.innerHTML = paginated.map(h => {
+        // PDF button kulla "SKY/014" apdiye poga thaan quote poodrom
+        return `
+        <tr>
+            <td>#${h.invNo}</td>
+            <td><strong>${h.customer}</strong><br><small>${h.phone}</small></td>
+            <td>${h.date}</td>
+            <td class="fw-bold">₹${h.total}</td>
+            <td>
+                <button class="btn btn-sm btn-outline-primary" onclick="reprint('${h.invNo}')">
+                   <i class="bi bi-file-pdf"></i> PDF
+                </button>
+            </td>
+        </tr>`;
+    }).join('');
 
-			renderPaginationControls();
-		}
+    renderPaginationControls();
+}
+
+
+
+
+
 
 		function renderPaginationControls() {
 			const totalPages = Math.ceil(filteredHistory.length / rowsPerPage);
@@ -737,10 +749,40 @@ try {
 			if(idx !== "") { document.getElementById('billPrice').value = materials[idx].price; document.getElementById('billGST').value = materials[idx].gst || 5; }
 		}
 
+		
+		
+
+
+
+
 		function reprint(no) {
-			const inv = invoiceHistory.find(x => x.invNo == no);
-			if(inv) { if(typeof inv.items === 'string') inv.items = JSON.parse(inv.items); generatePDF(inv); }
-		}
+    console.log("Searching for Invoice No:", no); // Debugging-ku
+    
+    // Exact match: "SKY/014" == "SKY/014" (OR) "5013" == "5013"
+    const inv = invoiceHistory.find(x => x.invNo.toString() === no.toString());
+    
+    if(inv) { 
+        let currentItems = inv.items;
+        if(typeof currentItems === 'string') {
+            try {
+                currentItems = JSON.parse(currentItems);
+            } catch(e) {
+                console.error("JSON Error:", e);
+                return alert("Items list-la error machi!");
+            }
+        }
+        generatePDF({...inv, items: currentItems});
+    } else {
+        alert("Invoice #" + no + " kandupudikka mudiyala !");
+    }
+}
+
+
+
+
+
+
+
 
 		function generatePDF(inv) {
 			const { jsPDF } = window.jspdf;
