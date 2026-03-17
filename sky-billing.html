@@ -325,14 +325,27 @@ document.getElementById("adminPass")?.addEventListener("keypress", function(e) {
 			<div class="tab-pane fade show active" id="tab-billing">
 				<div class="row">
 					<div class="col-lg-8">
-						<div class="card p-3 mb-3 border-start border-4 border-primary">
+						<!--<div class="card p-3 mb-3 border-start border-4 border-primary">
 							<h6 class="fw-bold mb-3 text-primary">CUSTOMER INFORMATION</h6>
 							<div class="row g-2">
 								<div class="col-md-4"><input type="text" id="custName" class="form-control" placeholder="Customer Name"></div>
 								<div class="col-md-4"><input type="text" id="custPhone" class="form-control" placeholder="Phone Number"></div>
 								<div class="col-md-4"><input type="text" id="custAddr" class="form-control" placeholder="Address"></div>
 							</div>
-						</div>
+						</div>-->
+
+
+						<div class="card p-3 mb-3 border-start border-4 border-primary">
+    <h6 class="fw-bold mb-3 text-primary">CUSTOMER INFORMATION</h6>
+    <div class="row g-2">
+        <div class="col-md-3"><input type="text" id="custName" class="form-control" placeholder="Customer Name"></div>
+        <div class="col-md-3"><input type="text" id="custPhone" class="form-control" placeholder="Phone Number"></div>
+        <div class="col-md-3"><input type="text" id="custAddr" class="form-control" placeholder="Address"></div>
+        <div class="col-md-3"><input type="date" id="billDate" class="form-control"></div>
+    </div>
+</div>
+
+
 
 						<div class="card p-3 mb-3">
 							<div class="row g-2">
@@ -628,24 +641,70 @@ function exportToExcel() {
 			document.getElementById('lblGrandTotal').innerText = `₹${(sub + gst).toFixed(2)}`;
 		}
 
+
+
+
+
+
+
+
 		async function saveAndProcess() {
-			if(currentBillItems.length === 0) return alert("Empty Bill!");
-			const btn = document.getElementById('btnSave'); btn.disabled = true;
-			const invData = {
-				type: "INVOICE", invNo: (5000+invoiceHistory.length+1), customer: document.getElementById('custName').value || "Walk-in",
-				phone: document.getElementById('custPhone').value || "N/A", address: document.getElementById('custAddr').value || "N/A",
-				date: new Date().toLocaleDateString('en-US'),
-				subtotal: document.getElementById('lblSubtotal').innerText,
-				gstAmt: document.getElementById('lblGst').innerText,
-				total: document.getElementById('lblGrandTotal').innerText,
-				items: currentBillItems
-			};
-			try {
-				await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(invData) });
-				generatePDF(invData);
-				currentBillItems = []; renderBillTable(); loadDataFromSheets();
-			} catch (e) { alert("Error!"); } finally { btn.disabled = false; }
-		}
+    if(currentBillItems.length === 0) return alert("Empty Bill!");
+    
+    // Date Logic: Select panna date yedukkum, illana current date
+    const selectedDate = document.getElementById('billDate').value;
+    let finalDate;
+    if(selectedDate) {
+        const d = new Date(selectedDate);
+        // Format: M/D/YYYY (Spreadsheet format-ku match aaga)
+        finalDate = (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
+    } else {
+        finalDate = new Date().toLocaleDateString('en-US');
+    }
+
+    const btn = document.getElementById('btnSave'); 
+    btn.disabled = true;
+    btn.innerText = "Saving...";
+
+    const invData = { 
+        type: "INVOICE", 
+        invNo: (5000 + invoiceHistory.length + 1), 
+        customer: document.getElementById('custName').value || "Walk-in", 
+        phone: document.getElementById('custPhone').value || "N/A", 
+        address: document.getElementById('custAddr').value || "N/A",
+        date: finalDate, 
+        subtotal: document.getElementById('lblSubtotal').innerText,
+        gstAmt: document.getElementById('lblGst').innerText, 
+        total: document.getElementById('lblGrandTotal').innerText,
+        items: currentBillItems 
+    };
+
+    try {
+        const response = await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(invData) });
+        generatePDF(invData);
+        
+        // Reset and Reload
+        currentBillItems = []; 
+        renderBillTable(); 
+        document.getElementById('custName').value = '';
+        document.getElementById('custPhone').value = '';
+        document.getElementById('custAddr').value = '';
+        loadDataFromSheets(); // Data refresh aagum
+        
+        alert("Invoice Saved Successfully!");
+    } catch (e) { 
+        console.error(e);
+        alert("Error saving invoice!"); 
+    } finally { 
+        btn.disabled = false; 
+        btn.innerText = "Save & Print";
+    }
+}
+
+
+
+
+
 
 		async function saveMaterial() {
 			const n = document.getElementById('pName').value, p = document.getElementById('pPrice').value, g = document.getElementById('pGST').value;
