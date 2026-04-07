@@ -1,0 +1,65 @@
+/**
+ * SKY ENTERPRISES - CLOUD BILLING BRIDGE
+ * Handles Invoices and Materials storage.
+ */
+
+function doPost(e) {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var data = JSON.parse(e.postData.contents);
+    
+    if (data.type === "MATERIAL") {
+      var sheet = ss.getSheetByName("Materials") || ss.insertSheet("Materials");
+      if (sheet.getLastRow() === 0) {
+        sheet.appendRow(["Name", "Price", "GST"]);
+      }
+      sheet.appendRow([data.name, data.price, data.gst]);
+      return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+    } 
+    else {
+      var sheet = ss.getSheetByName("Invoices") || ss.insertSheet("Invoices");
+      if (sheet.getLastRow() === 0) {
+        sheet.appendRow(["InvoiceNo", "Date", "CustomerName", "Phone", "Address", "Subtotal", "GSTAmount", "TotalAmount", "Items"]);
+      }
+      sheet.appendRow([
+        data.invNo, data.date, data.customer, data.phone, data.address,
+        data.subtotal, data.gstAmt, data.total, JSON.stringify(data.items)
+      ]);
+      return ContentService.createTextOutput("Success").setMimeType(ContentService.MimeType.TEXT);
+    }
+  } catch (err) {
+    return ContentService.createTextOutput("Error: " + err.message).setMimeType(ContentService.MimeType.TEXT);
+  }
+}
+
+function doGet() {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var res = { invoices: [], materials: [] };
+
+    var invSheet = ss.getSheetByName("Invoices");
+    if (invSheet && invSheet.getLastRow() > 1) {
+      var rows = invSheet.getDataRange().getValues();
+      rows.shift();
+      res.invoices = rows.map(function(r) {
+        return {
+          invNo: r[0], date: r[1], customer: r[2], phone: r[3], address: r[4],
+          subtotal: r[5], gstAmt: r[6], total: r[7], items: r[8]
+        };
+      });
+    }
+
+    var matSheet = ss.getSheetByName("Materials");
+    if (matSheet && matSheet.getLastRow() > 1) {
+      var rows = matSheet.getDataRange().getValues();
+      rows.shift();
+      res.materials = rows.map(function(r) {
+        return { name: r[0], price: r[1], gst: r[2] };
+      });
+    }
+
+    return ContentService.createTextOutput(JSON.stringify(res)).setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({error: err.message})).setMimeType(ContentService.MimeType.JSON);
+  }
+}
