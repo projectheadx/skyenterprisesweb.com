@@ -479,14 +479,14 @@
 		// ADD ITEM with DESCRIPTION/NOTE, RATE, QTY, GST
 		function addItem() {
 			const idx = document.getElementById('billProduct').value;
-			const qty = parseFloat(document.getElementById('billQty').value);
-			const price = parseFloat(document.getElementById('billPrice').value);
-			const gstP = parseFloat(document.getElementById('billGST').value);
+			const qty = parseFloat(document.getElementById('billQty').value) || 1;
+			const price = parseFloat(document.getElementById('billPrice').value) || 0;
+			const gstP = parseFloat(document.getElementById('billGST').value) || 0;
 			const noteText = document.getElementById('billNote').value.trim();
 
-			if (idx === "" || isNaN(qty) || qty <= 0) return alert("Select material and valid quantity");
-			if (isNaN(price) || price <= 0) return alert("Enter valid rate");
-			if (isNaN(gstP) || gstP < 0) return alert("Enter valid GST");
+			if (idx === "" || qty <= 0) return alert("Select material and valid quantity");
+			if (price <= 0) return alert("Enter valid rate");
+			if (gstP < 0) return alert("Enter valid GST");
 
 			const taxable = price * qty;
 			const gstAmt = (taxable * gstP) / 100;
@@ -547,25 +547,17 @@
 
 		function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function (m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
 
-		// SAVE INVOICE - items include description/note
+		// SAVE INVOICE - FIXED CALCULATION
 		async function saveAndProcess() {
 			if (currentBillItems.length === 0) return alert("Empty Bill!");
 			const selectedDate = document.getElementById('billDate').value;
 			let finalDate;
 			if (selectedDate) {
 				const d = new Date(selectedDate);
-
-
-
 				const day = String(d.getDate()).padStart(2, '0');
 				const month = String(d.getMonth() + 1).padStart(2, '0');
 				const year = d.getFullYear();
 				finalDate = `${day}/${month}/${year}`;
-
-
-
-
-
 			} else {
 				const d = new Date();
 				const day = String(d.getDate()).padStart(2, '0');
@@ -590,10 +582,12 @@
 				note: itm.note || ""
 			}));
 
-			const subTotalValue = parseFloat(document.getElementById('lblSubtotal').innerText.replace(/[₹,]/g, ''));
-			const cgstValue = parseFloat(document.getElementById('lblCGST').innerText.replace(/[₹,]/g, ''));
-			const sgstValue = parseFloat(document.getElementById('lblSGST').innerText.replace(/[₹,]/g, ''));
-			const grandTotalValue = parseFloat(document.getElementById('lblGrandTotal').innerText.replace(/[₹,]/g, ''));
+			// Calculate directly from items - FIXED!
+			const subTotalValue = currentBillItems.reduce((sum, item) => sum + item.taxable, 0);
+			const totalGstValue = currentBillItems.reduce((sum, item) => sum + item.gstAmt, 0);
+			const cgstValue = totalGstValue / 2;
+			const sgstValue = totalGstValue / 2;
+			const grandTotalValue = subTotalValue + totalGstValue;
 
 			const invData = {
 				type: "INVOICE",
@@ -674,16 +668,29 @@
 					body: tableBody,
 					headStyles: { fillColor: [52, 152, 219] },
 					columnStyles: {
-						1: { cellWidth: 40 }  // extra width for description column
+						1: { cellWidth: 40 }
 					},
 					theme: 'striped'
 				});
 
 				const fY = doc.lastAutoTable.finalY + 10;
+
+				// Calculate CGST/SGST percentages for display
+				let cgstPercent = 0, sgstPercent = 0;
+				if (itemsArray.length > 0) {
+					const totalTaxable = itemsArray.reduce((sum, item) => sum + (item.price * item.qty || 0), 0);
+					if (totalTaxable > 0) {
+						const totalGstPercent = itemsArray.reduce((sum, item) => sum + ((item.gstP || 0) * (item.price * item.qty || 0)), 0);
+						const avgGstPercent = totalGstPercent / totalTaxable;
+						cgstPercent = avgGstPercent / 2;
+						sgstPercent = avgGstPercent / 2;
+					}
+				}
+
 				doc.setFont(undefined, 'bold');
 				doc.text(`Subtotal: ${inv.subtotal}`, 140, fY);
-				doc.text(`CGST: ${inv.cgst || '₹0.00'}`, 140, fY + 7);
-				doc.text(`SGST: ${inv.sgst || '₹0.00'}`, 140, fY + 14);
+				doc.text(`CGST (${cgstPercent.toFixed(2)}%): ${inv.cgst || '₹0.00'}`, 140, fY + 7);
+				doc.text(`SGST (${sgstPercent.toFixed(2)}%): ${inv.sgst || '₹0.00'}`, 140, fY + 14);
 				doc.setTextColor(231, 76, 60);
 				doc.text(`Total Payable: ${inv.total}`, 140, fY + 22);
 				const pageHeight = doc.internal.pageSize.height;
@@ -724,9 +731,31 @@
 			const inv = invoiceHistory.find(x => x.invNo.toString() === no.toString());
 			if (inv) {
 				let currentItems = inv.items;
-				if (typeof currentItems === 'string') { try { currentItems = JSON.parse(currentItems); } catch (e) { console.error("JSON Error:", e); return alert("Items list-la error machi!"); } }
-				generatePDF({ ...inv, items: currentItems });
-			} else { alert("Invoice #" + no + " kandupudikka mudiyala !"); }
+				if (typeof currentItems === 'string') {
+					try { currentItems = JSON.parse(currentItems); }
+					catch (e) { console.error("JSON Error:", e); return alert("Items list-la error machi!"); }
+				}
+
+				// Calculate CGST and SGST from items if not present in stored data
+				let cgstValue = inv.cgst || '₹0.00';
+				let sgstValue = inv.sgst || '₹0.00';
+
+				// If old invoice or missing CGST/SGST - calculate from items
+				if (!inv.cgst || inv.cgst === '₹0.00' || inv.cgst === '₹0.00') {
+					const totalGst = currentItems.reduce((sum, item) => sum + (item.gstAmt || 0), 0);
+					cgstValue = `₹${(totalGst / 2).toFixed(2)}`;
+					sgstValue = `₹${(totalGst / 2).toFixed(2)}`;
+				}
+
+				generatePDF({
+					...inv,
+					items: currentItems,
+					cgst: cgstValue,
+					sgst: sgstValue
+				});
+			} else {
+				alert("Invoice #" + no + " kandupudikka mudiyala !");
+			}
 		}
 	</script>
 </body>
