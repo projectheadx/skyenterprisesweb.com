@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<title>Sky Enterprises - Invoice Manager</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Segoe UI', Roboto, sans-serif;
+		}
+
+		body {
+			background: #f0f2f7;
+			padding: 20px;
+		}
+
+		.main-container {
+			max-width: 1400px;
+			margin: 0 auto;
+		}
+
+		.sky-header {
+			background: linear-gradient(135deg, #0b2b40, #0f3b4f);
+			color: white;
+			padding: 1rem 2rem;
+			border-radius: 28px;
+			margin-bottom: 25px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 15px;
+		}
+
+			.sky-header h1 {
+				font-size: 1.7rem;
+				display: flex;
+				align-items: center;
+				gap: 12px;
+			}
+
+		.badge-total {
+			background: #ffc107;
+			color: #1e2f3a;
+			padding: 8px 18px;
+			border-radius: 40px;
+			font-weight: bold;
+		}
+
+		.row-split {
+			display: grid;
+			grid-template-columns: 1fr 1.3fr;
+			gap: 24px;
+		}
+
+		.form-card {
+			background: white;
+			border-radius: 28px;
+			padding: 24px;
+			box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+		}
+
+			.form-card h2 {
+				margin-bottom: 20px;
+				border-left: 5px solid #0f3b4f;
+				padding-left: 15px;
+				color: #1e3a44;
+			}
+
+		.input-group {
+			margin-bottom: 18px;
+		}
+
+			.input-group label {
+				font-weight: 600;
+				display: block;
+				margin-bottom: 6px;
+				color: #2c3e44;
+			}
+
+			.input-group input, .input-group textarea {
+				width: 100%;
+				padding: 12px 16px;
+				border: 1px solid #cbdde3;
+				border-radius: 24px;
+				font-size: 1rem;
+				transition: 0.2s;
+			}
+
+				.input-group input:focus, .input-group textarea:focus {
+					outline: none;
+					border-color: #0f3b4f;
+					box-shadow: 0 0 0 2px rgba(15,59,79,0.1);
+				}
+
+		.row-duo {
+			display: flex;
+			gap: 15px;
+		}
+
+			.row-duo .input-group {
+				flex: 1;
+			}
+
+		.btn-add {
+			background: #0f3b4f;
+			width: 100%;
+			padding: 12px;
+			border: none;
+			border-radius: 40px;
+			color: white;
+			font-weight: bold;
+			font-size: 1rem;
+			cursor: pointer;
+			transition: 0.2s;
+		}
+
+			.btn-add:hover {
+				background: #0a2c3b;
+				transform: translateY(-2px);
+			}
+
+		.list-card {
+			background: white;
+			border-radius: 28px;
+			padding: 20px;
+			box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+		}
+
+		.list-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 20px;
+			flex-wrap: wrap;
+		}
+
+		.invoice-table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+			.invoice-table th, .invoice-table td {
+				padding: 12px 8px;
+				text-align: left;
+				border-bottom: 1px solid #e2eaf0;
+			}
+
+			.invoice-table th {
+				background: #f8fafc;
+				font-weight: 700;
+				color: #1e3a44;
+			}
+
+		.action-icons i {
+			font-size: 1.2rem;
+			margin: 0 6px;
+			cursor: pointer;
+			transition: 0.2s;
+		}
+
+		.fa-file-pdf {
+			color: #dc3545;
+		}
+
+		.fa-whatsapp {
+			color: #25D366;
+		}
+
+		.fa-trash-alt {
+			color: #6c757d;
+		}
+
+		.action-icons i:hover {
+			transform: scale(1.15);
+		}
+
+		.pagination-area {
+			display: flex;
+			justify-content: flex-end;
+			gap: 10px;
+			margin-top: 20px;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+		.page-btn {
+			background: #f0f3f8;
+			border: none;
+			padding: 6px 14px;
+			border-radius: 30px;
+			cursor: pointer;
+			font-weight: 500;
+		}
+
+			.page-btn.active {
+				background: #0f3b4f;
+				color: white;
+			}
+
+		.info-text {
+			font-size: 0.8rem;
+			color: #4b6a78;
+			margin-top: 12px;
+			text-align: right;
+		}
+		/* Invoice template for PDF */
+		.invoice-for-pdf {
+			position: fixed;
+			left: -9999px;
+			top: 0;
+			background: white;
+			width: 800px;
+			padding: 30px;
+			font-family: 'Segoe UI', Arial, sans-serif;
+		}
+
+		.toast {
+			position: fixed;
+			bottom: 30px;
+			right: 30px;
+			background: #0f3b4f;
+			color: white;
+			padding: 12px 24px;
+			border-radius: 50px;
+			z-index: 9999;
+			animation: fadeInUp 0.3s ease;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+		}
+
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@media (max-width: 800px) {
+			.row-split {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="main-container">
+		<div class="sky-header">
+			<div>
+				<h1><i class="fas fa-truck-moving"></i> Sky Enterprises</h1>
+				<p>Material Supplier • Individual Invoice PDF & WhatsApp</p>
+			</div>
+			<div class="badge-total" id="globalTotalSpan">Total: ₹0</div>
+		</div>
+
+		<div class="row-split">
+			<div class="form-card">
+				<h2><i class="fas fa-file-invoice"></i> New Invoice Entry</h2>
+				<form id="invoiceForm">
+					<div class="input-group">
+						<label><i class="fas fa-user-tie"></i> Supplier Name *</label>
+						<input type="text" id="supplierName" placeholder="e.g., M/s. Anand Steels" required>
+					</div>
+					<div class="input-group">
+						<label><i class="fas fa-clipboard-list"></i> Material Description</label>
+						<textarea id="description" rows="2" placeholder="Cement 500 bags, Steel rods etc"></textarea>
+					</div>
+					<div class="row-duo">
+						<div class="input-group">
+							<label><i class="fas fa-rupee-sign"></i> Amount (₹) *</label>
+							<input type="number" id="amount" step="0.01" placeholder="0.00" required>
+						</div>
+						<div class="input-group">
+							<label><i class="fas fa-calendar"></i> Bill Date</label>
+							<input type="date" id="billDate" required>
+						</div>
+					</div>
+					<button type="submit" class="btn-add"><i class="fas fa-plus-circle"></i> Add Bill / Invoice</button>
+				</form>
+				<div class="info-text" style="margin-top: 15px; text-align:center;">✅ Each bill - Download PDF or Share via WhatsApp</div>
+			</div>
+
+			<div class="list-card">
+				<div class="list-header">
+					<h2><i class="fas fa-receipt"></i> All Invoices</h2>
+					<span id="recordCount" style="background:#eef2f5; padding:4px 12px; border-radius:30px;">0 entries</span>
+				</div>
+				<div style="overflow-x: auto;">
+					<table class="invoice-table" id="invoiceTable">
+						<thead>
+							<tr><th>Supplier</th><th>Description</th><th>Amount</th><th>Date</th><th>Actions</th></tr>
+						</thead>
+						<tbody id="tableBody">
+							<tr><td colspan="5" style="text-align:center;">No invoices yet. Add first bill.</td></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="pagination-area" id="paginationControls"></div>
+				<div class="info-text" id="paginationInfo"></div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		let invoices = [];
+		let currentPage = 1;
+		const itemsPerPage = 4;
+
+		function loadData() {
+			const saved = localStorage.getItem("sky_invoices_fixed");
+			if (saved && saved.length > 0) {
+				invoices = JSON.parse(saved);
+			} else {
+				invoices = [
+					{ id: 1001, supplier: "Shakti Cement Corp", description: "OPC 53 Grade - 400 Bags", amount: 215000, date: "2025-03-01", invoiceNo: "SKY-001" },
+					{ id: 1002, supplier: "JSW Steel Ltd", description: "TMT 12mm & 16mm rods", amount: 478500, date: "2025-03-05", invoiceNo: "SKY-002" },
+					{ id: 1003, supplier: "Brick World", description: "Clay bricks 2500 pcs", amount: 52500, date: "2025-03-10", invoiceNo: "SKY-003" },
+					{ id: 1004, supplier: "Fine Sand Suppliers", description: "River sand & 20mm jelly", amount: 98000, date: "2025-03-12", invoiceNo: "SKY-004" }
+				];
+				saveData();
+			}
+			renderList();
+			updateTotal();
+		}
+
+		function saveData() {
+			localStorage.setItem("sky_invoices_fixed", JSON.stringify(invoices));
+		}
+
+		function generateInvoiceNo() {
+			let max = 0;
+			invoices.forEach(inv => {
+				let num = parseInt(inv.invoiceNo?.replace('SKY-', '')) || 0;
+				if (num > max) max = num;
+			});
+			return `SKY-${String(max + 1).padStart(3, '0')}`;
+		}
+
+		function addInvoice(supplier, description, amount, date) {
+			if (!supplier.trim()) { showToast("Supplier name required", "error"); return false; }
+			if (isNaN(amount) || amount <= 0) { showToast("Valid amount required", "error"); return false; }
+			const newInvoice = {
+				id: Date.now(),
+				supplier: supplier.trim(),
+				description: description.trim() || "-",
+				amount: parseFloat(amount),
+				date: date,
+				invoiceNo: generateInvoiceNo()
+			};
+			invoices.unshift(newInvoice);
+			saveData();
+			currentPage = 1;
+			renderList();
+			updateTotal();
+			showToast("Invoice added successfully!", "success");
+			return true;
+		}
+
+		function deleteInvoice(id) {
+			if (confirm("Delete this invoice?")) {
+				invoices = invoices.filter(i => i.id !== id);
+				saveData();
+				const totalPages = Math.ceil(invoices.length / itemsPerPage);
+				if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+				if (invoices.length === 0) currentPage = 1;
+				renderList();
+				updateTotal();
+				showToast("Invoice deleted", "success");
+			}
+		}
+
+		function updateTotal() {
+			const total = invoices.reduce((s, i) => s + i.amount, 0);
+			document.getElementById("globalTotalSpan").innerHTML = `Total: ₹${total.toLocaleString('en-IN', { minimumFractionDigits: 2 })}`;
+			document.getElementById("recordCount").innerHTML = `${invoices.length} invoice(s)`;
+		}
+
+		function getPaginated() {
+			const start = (currentPage - 1) * itemsPerPage;
+			return invoices.slice(start, start + itemsPerPage);
+		}
+
+		function renderList() {
+			const paginated = getPaginated();
+			const tbody = document.getElementById("tableBody");
+
+			if (paginated.length === 0) {
+				tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;">No invoices found</td></tr>`;
+			} else {
+				tbody.innerHTML = paginated.map(inv => `
+					<tr>
+						<td><strong>${escapeHtml(inv.supplier)}</strong><br><small style="color:#777;">${inv.invoiceNo}</small></td>
+						<td>${escapeHtml(inv.description)}</td>
+						<td style="color:#2e7d32; font-weight:600;">₹ ${inv.amount.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</td>
+						<td>${formatDate(inv.date)}</td>
+						<td class="action-icons">
+							<i class="fas fa-file-pdf" data-id="${inv.id}" title="Download PDF"></i>
+							<i class="fab fa-whatsapp" data-id="${inv.id}" title="Share via WhatsApp"></i>
+							<i class="fas fa-trash-alt" data-id="${inv.id}" title="Delete"></i>
+						</td>
+					</tr>
+				`).join('');
+			}
+
+			document.querySelectorAll('.fa-file-pdf').forEach(icon => {
+				icon.addEventListener('click', (e) => downloadPDF(parseInt(icon.dataset.id)));
+			});
+			document.querySelectorAll('.fa-whatsapp').forEach(icon => {
+				icon.addEventListener('click', (e) => shareWhatsApp(parseInt(icon.dataset.id)));
+			});
+			document.querySelectorAll('.fa-trash-alt').forEach(icon => {
+				icon.addEventListener('click', (e) => deleteInvoice(parseInt(icon.dataset.id)));
+			});
+
+			// Pagination
+			const totalPages = Math.ceil(invoices.length / itemsPerPage);
+			const paginationDiv = document.getElementById("paginationControls");
+			const infoDiv = document.getElementById("paginationInfo");
+
+			if (totalPages <= 1) {
+				paginationDiv.innerHTML = invoices.length ? '<button class="page-btn" disabled>Page 1</button>' : '';
+				infoDiv.innerText = invoices.length ? `Showing 1-${invoices.length} of ${invoices.length}` : "No entries";
+				return;
+			}
+
+			let html = `<button class="page-btn" id="prevBtn" ${currentPage === 1 ? 'disabled' : ''}>◀ Prev</button>`;
+			for (let i = 1; i <= totalPages; i++) {
+				html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+			}
+			html += `<button class="page-btn" id="nextBtn" ${currentPage === totalPages ? 'disabled' : ''}>Next ▶</button>`;
+			paginationDiv.innerHTML = html;
+
+			document.querySelectorAll('[data-page]').forEach(btn => {
+				btn.addEventListener('click', () => {
+					currentPage = parseInt(btn.dataset.page);
+					renderList();
+				});
+			});
+			document.getElementById("prevBtn")?.addEventListener('click', () => { if (currentPage > 1) { currentPage--; renderList(); } });
+			document.getElementById("nextBtn")?.addEventListener('click', () => { if (currentPage < totalPages) { currentPage++; renderList(); } });
+
+			const start = (currentPage - 1) * itemsPerPage + 1;
+			const end = Math.min(currentPage * itemsPerPage, invoices.length);
+			infoDiv.innerText = `Showing ${start} - ${end} of ${invoices.length} invoices`;
+		}
+
+		function buildInvoiceHTML(inv) {
+			const dateStr = new Date(inv.date).toLocaleDateString('en-IN');
+			return `
+				<div style="background:white; padding:30px; width:750px; font-family:'Segoe UI',Arial;">
+					<div style="text-align:center; border-bottom:3px solid #0f3b4f; padding-bottom:15px; margin-bottom:25px;">
+						<h2 style="color:#0f3b4f; margin:0;">🏗️ SKY ENTERPRISES</h2>
+						<p style="margin:5px 0;">Construction Material Supplier Invoice</p>
+						<p><strong>Invoice No: ${inv.invoiceNo}</strong> | Date: ${dateStr}</p>
+					</div>
+					<div style="background:#f5f5f5; padding:12px; margin-bottom:20px; display:flex; justify-content:space-between;">
+						<div><strong>Supplier:</strong> ${escapeHtml(inv.supplier)}</div>
+						<div><strong>Bill Date:</strong> ${dateStr}</div>
+					</div>
+					<table style="width:100%; border-collapse:collapse;">
+						<thead>
+							<tr style="background:#0f3b4f; color:white;">
+								<th style="border:1px solid #ddd; padding:10px;">Sl No</th>
+								<th style="border:1px solid #ddd; padding:10px;">Description</th>
+								<th style="border:1px solid #ddd; padding:10px;">Amount (₹)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="border:1px solid #ddd; padding:10px;">1</td>
+								<td style="border:1px solid #ddd; padding:10px;">${escapeHtml(inv.description)}</td>
+								<td style="border:1px solid #ddd; padding:10px;">₹ ${inv.amount.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</td>
+							</tr>
+						</tbody>
+					</table>
+					<div style="margin-top:25px; text-align:right; font-size:1.3rem; font-weight:bold; padding:10px; border-top:2px solid #0f3b4f;">
+						Total: ₹ ${inv.amount.toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+					</div>
+					<div style="margin-top:20px; font-size:10px; text-align:center; color:#888;">
+						This is a computer generated invoice | Sky Enterprises - Authorized Dealer
+					</div>
+				</div>
+			`;
+		}
+
+		async function downloadPDF(invoiceId) {
+			const invoice = invoices.find(i => i.id === invoiceId);
+			if (!invoice) { showToast("Invoice not found", "error"); return; }
+
+			showToast("Generating PDF...", "info");
+
+			const container = document.createElement('div');
+			container.className = 'invoice-for-pdf';
+			container.innerHTML = buildInvoiceHTML(invoice);
+			document.body.appendChild(container);
+
+			try {
+				const canvas = await html2canvas(container.firstChild, {
+					scale: 2,
+					backgroundColor: '#ffffff',
+					logging: false
+				});
+				const imgData = canvas.toDataURL('image/png');
+				const { jsPDF } = window.jspdf;
+				const pdf = new jsPDF('p', 'mm', 'a4');
+				const imgWidth = 190;
+				const pageHeight = 277;
+				const imgHeight = (canvas.height * imgWidth) / canvas.width;
+				let position = 0;
+
+				pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+				if (imgHeight > pageHeight) {
+					let heightLeft = imgHeight - pageHeight;
+					position = -pageHeight;
+					while (heightLeft > 0) {
+						pdf.addPage();
+						pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
+						heightLeft -= pageHeight;
+						position -= pageHeight;
+					}
+				}
+				pdf.save(`Invoice_${invoice.invoiceNo}_SkyEnterprises.pdf`);
+				showToast("PDF Downloaded Successfully!", "success");
+			} catch (err) {
+				console.error(err);
+				showToast("PDF failed. Try again!", "error");
+			} finally {
+				document.body.removeChild(container);
+			}
+		}
+
+		async function shareWhatsApp(invoiceId) {
+			const invoice = invoices.find(i => i.id === invoiceId);
+			if (!invoice) { showToast("Invoice not found", "error"); return; }
+
+			showToast("Preparing for WhatsApp...", "info");
+
+			const container = document.createElement('div');
+			container.className = 'invoice-for-pdf';
+			container.innerHTML = buildInvoiceHTML(invoice);
+			document.body.appendChild(container);
+
+			try {
+				const canvas = await html2canvas(container.firstChild, {
+					scale: 2,
+					backgroundColor: '#ffffff',
+					logging: false
+				});
+				const imgData = canvas.toDataURL('image/png');
+				const { jsPDF } = window.jspdf;
+				const pdf = new jsPDF('p', 'mm', 'a4');
+				const imgWidth = 190;
+				const imgHeight = (canvas.height * imgWidth) / canvas.width;
+				pdf.addImage(imgData, 'PNG', 10, 0, imgWidth, imgHeight);
+				const pdfBlob = pdf.output('blob');
+
+				const text = `Sky Enterprises Invoice\n${invoice.invoiceNo}\nSupplier: ${invoice.supplier}\nAmount: ₹${invoice.amount.toLocaleString('en-IN')}\nDate: ${formatDate(invoice.date)}`;
+				const encodedText = encodeURIComponent(text);
+
+				// Try Web Share API first (Mobile)
+				if (navigator.share && navigator.canShare) {
+					const file = new File([pdfBlob], `Invoice_${invoice.invoiceNo}.pdf`, { type: 'application/pdf' });
+					if (navigator.canShare({ files: [file] })) {
+						await navigator.share({
+							title: `Invoice ${invoice.invoiceNo}`,
+							text: text,
+							files: [file]
+						});
+						showToast("Shared successfully!", "success");
+						document.body.removeChild(container);
+						return;
+					}
+				}
+
+				// Fallback: Download PDF + Open WhatsApp
+				const url = URL.createObjectURL(pdfBlob);
+				const a = document.createElement('a');
+				a.href = url;
+				a.download = `Invoice_${invoice.invoiceNo}.pdf`;
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
+
+				setTimeout(() => {
+					window.open(`https://wa.me/?text=${encodedText}`, '_blank');
+				}, 500);
+
+				showToast("PDF downloaded. WhatsApp opened!", "success");
+			} catch (err) {
+				console.error(err);
+				showToast("Failed. Use PDF download option.", "error");
+			} finally {
+				if (document.body.contains(container)) document.body.removeChild(container);
+			}
+		}
+
+		function showToast(msg, type) {
+			const toast = document.createElement('div');
+			toast.className = 'toast';
+			const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+			toast.innerHTML = `${icon} ${msg}`;
+			document.body.appendChild(toast);
+			setTimeout(() => toast.remove(), 3000);
+		}
+
+		function escapeHtml(str) {
+			if (!str) return '';
+			return str.replace(/[&<>]/g, (m) => {
+				if (m === '&') return '&amp;';
+				if (m === '<') return '&lt;';
+				if (m === '>') return '&gt;';
+				return m;
+			});
+		}
+
+		function formatDate(dateStr) {
+			if (!dateStr) return '-';
+			const parts = dateStr.split('-');
+			if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
+			return dateStr;
+		}
+
+		document.getElementById("invoiceForm").addEventListener("submit", (e) => {
+			e.preventDefault();
+			const supplier = document.getElementById("supplierName").value;
+			const description = document.getElementById("description").value;
+			const amount = parseFloat(document.getElementById("amount").value);
+			let date = document.getElementById("billDate").value;
+			if (!date) date = new Date().toISOString().slice(0, 10);
+			if (addInvoice(supplier, description, amount, date)) {
+				document.getElementById("invoiceForm").reset();
+				document.getElementById("billDate").valueAsDate = new Date();
+				document.getElementById("supplierName").focus();
+			}
+		});
+
+		document.getElementById("billDate").valueAsDate = new Date();
+		loadData();
+	</script>
+</body>
+</html>
