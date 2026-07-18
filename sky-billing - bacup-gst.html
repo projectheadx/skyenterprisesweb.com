@@ -279,8 +279,7 @@
 						<div class="total-box shadow">
 							<h5 class="mb-3 border-bottom pb-2 border-secondary">SUMMARY</h5>
 							<div class="d-flex justify-content-between mb-2"><span>Subtotal</span> <span id="lblSubtotal">₹0.00</span></div>
-							<div class="d-flex justify-content-between mb-2"><span>CGST (<span id="cgstPercent">0</span>%)</span> <span id="lblCGST">₹0.00</span></div>
-							<div class="d-flex justify-content-between mb-2"><span>SGST (<span id="sgstPercent">0</span>%)</span> <span id="lblSGST">₹0.00</span></div>
+							<div class="d-flex justify-content-between mb-2"><span>GST Amount</span> <span id="lblGst">₹0.00</span></div>
 							<hr>
 							<div class="d-flex justify-content-between mb-4"><span class="h5">Total Payable</span> <span class="h3 text-warning" id="lblGrandTotal">₹0.00</span></div>
 							<button class="btn btn-primary btn-lg w-100 fw-bold" id="btnSave" onclick="saveAndProcess()">Save & Print</button>
@@ -387,12 +386,11 @@
 					"Customer Name": inv.customer || "",
 					"Mobile No": inv.phone || "",
 					"Sub Total": (inv.subtotal || "0").toString().replace(/[₹,]/g, ''),
-					"CGST": (inv.cgst || "0").toString().replace(/[₹,]/g, ''),
-					"SGST": (inv.sgst || "0").toString().replace(/[₹,]/g, ''),
+					"GST Value": (inv.gstAmt || "0").toString().replace(/[₹,]/g, ''),
 					"Total Amount": (inv.total || "0").toString().replace(/[₹,]/g, '')
 				}));
 				const worksheet = XLSX.utils.json_to_sheet(excelData);
-				const wscols = [{ wch: 12 }, { wch: 15 }, { wch: 25 }, { wch: 15 }, { wch: 12 }, { wch: 12 }, { wch: 12 }, { wch: 15 }];
+				const wscols = [{ wch: 12 }, { wch: 15 }, { wch: 25 }, { wch: 15 }, { wch: 12 }, { wch: 12 }, { wch: 15 }];
 				worksheet['!cols'] = wscols;
 				const workbook = XLSX.utils.book_new();
 				XLSX.utils.book_append_sheet(workbook, worksheet, "Sky_Invoices");
@@ -479,14 +477,14 @@
 		// ADD ITEM with DESCRIPTION/NOTE, RATE, QTY, GST
 		function addItem() {
 			const idx = document.getElementById('billProduct').value;
-			const qty = parseFloat(document.getElementById('billQty').value) || 1;
-			const price = parseFloat(document.getElementById('billPrice').value) || 0;
-			const gstP = parseFloat(document.getElementById('billGST').value) || 0;
+			const qty = parseFloat(document.getElementById('billQty').value);
+			const price = parseFloat(document.getElementById('billPrice').value);
+			const gstP = parseFloat(document.getElementById('billGST').value);
 			const noteText = document.getElementById('billNote').value.trim();
 
-			if (idx === "" || qty <= 0) return alert("Select material and valid quantity");
-			if (price <= 0) return alert("Enter valid rate");
-			if (gstP < 0) return alert("Enter valid GST");
+			if (idx === "" || isNaN(qty) || qty <= 0) return alert("Select material and valid quantity");
+			if (isNaN(price) || price <= 0) return alert("Enter valid rate");
+			if (isNaN(gstP) || gstP < 0) return alert("Enter valid GST");
 
 			const taxable = price * qty;
 			const gstAmt = (taxable * gstP) / 100;
@@ -514,50 +512,44 @@
 		function renderBillTable() {
 			const tbody = document.getElementById('billBody');
 			tbody.innerHTML = currentBillItems.map((item, i) => `
-						<tr>
-							<td>${escapeHtml(item.name)}</td>
-							<td><span class="note-badge" title="${escapeHtml(item.note)}">${item.note ? (item.note.length > 15 ? item.note.substring(0, 12) + '..' : item.note) : '—'}</span></td>
-							<td>₹${item.price}</td>
-							<td>${item.qty}</td>
-							<td>${item.gstP}%</td>
-							<td class="text-end fw-bold">₹${item.total.toFixed(2)}</td>
-							<td><i class="bi bi-trash text-danger" style="cursor:pointer;" onclick="currentBillItems.splice(${i},1);renderBillTable()"></i></td>
-						</tr>
-					`).join('');
-
+				<tr>
+					<td>${escapeHtml(item.name)}</td>
+					<td><span class="note-badge" title="${escapeHtml(item.note)}">${item.note ? (item.note.length > 15 ? item.note.substring(0, 12) + '..' : item.note) : '—'}</span></td>
+					<td>₹${item.price}</td>
+					<td>${item.qty}</td>
+					<td>${item.gstP}%</td>
+					<td class="text-end fw-bold">₹${item.total.toFixed(2)}</td>
+					<td><i class="bi bi-trash text-danger" style="cursor:pointer;" onclick="currentBillItems.splice(${i},1);renderBillTable()"></i></td>
+				</tr>
+			`).join('');
 			const sub = currentBillItems.reduce((a, b) => a + b.taxable, 0);
-			const totalGst = currentBillItems.reduce((a, b) => a + b.gstAmt, 0);
-			const cgst = totalGst / 2;
-			const sgst = totalGst / 2;
-
-			// Calculate weighted average GST percentage for display
-			let avgGstPercent = 0;
-			if (sub > 0) {
-				const totalGstPercent = currentBillItems.reduce((a, b) => a + (b.gstP * b.taxable), 0);
-				avgGstPercent = totalGstPercent / sub;
-			}
-
-			document.getElementById('cgstPercent').innerText = (avgGstPercent / 2).toFixed(2);
-			document.getElementById('sgstPercent').innerText = (avgGstPercent / 2).toFixed(2);
+			const gst = currentBillItems.reduce((a, b) => a + b.gstAmt, 0);
 			document.getElementById('lblSubtotal').innerText = `₹${sub.toFixed(2)}`;
-			document.getElementById('lblCGST').innerText = `₹${cgst.toFixed(2)}`;
-			document.getElementById('lblSGST').innerText = `₹${sgst.toFixed(2)}`;
-			document.getElementById('lblGrandTotal').innerText = `₹${(sub + totalGst).toFixed(2)}`;
+			document.getElementById('lblGst').innerText = `₹${gst.toFixed(2)}`;
+			document.getElementById('lblGrandTotal').innerText = `₹${(sub + gst).toFixed(2)}`;
 		}
 
 		function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, function (m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
 
-		// SAVE INVOICE - FIXED CALCULATION
+		// SAVE INVOICE - items include description/note
 		async function saveAndProcess() {
 			if (currentBillItems.length === 0) return alert("Empty Bill!");
 			const selectedDate = document.getElementById('billDate').value;
 			let finalDate;
 			if (selectedDate) {
 				const d = new Date(selectedDate);
+
+
+
 				const day = String(d.getDate()).padStart(2, '0');
 				const month = String(d.getMonth() + 1).padStart(2, '0');
 				const year = d.getFullYear();
 				finalDate = `${day}/${month}/${year}`;
+
+
+
+
+
 			} else {
 				const d = new Date();
 				const day = String(d.getDate()).padStart(2, '0');
@@ -582,13 +574,6 @@
 				note: itm.note || ""
 			}));
 
-			// Calculate directly from items - FIXED!
-			const subTotalValue = currentBillItems.reduce((sum, item) => sum + item.taxable, 0);
-			const totalGstValue = currentBillItems.reduce((sum, item) => sum + item.gstAmt, 0);
-			const cgstValue = totalGstValue / 2;
-			const sgstValue = totalGstValue / 2;
-			const grandTotalValue = subTotalValue + totalGstValue;
-
 			const invData = {
 				type: "INVOICE",
 				invNo: formattedInvNo,
@@ -596,10 +581,9 @@
 				phone: document.getElementById('custPhone').value || "N/A",
 				address: document.getElementById('custAddr').value || "N/A",
 				date: finalDate,
-				subtotal: `₹${subTotalValue.toFixed(2)}`,
-				cgst: `₹${cgstValue.toFixed(2)}`,
-				sgst: `₹${sgstValue.toFixed(2)}`,
-				total: `₹${grandTotalValue.toFixed(2)}`,
+				subtotal: document.getElementById('lblSubtotal').innerText,
+				gstAmt: document.getElementById('lblGst').innerText,
+				total: document.getElementById('lblGrandTotal').innerText,
 				items: itemsWithNote
 			};
 			try {
@@ -668,31 +652,16 @@
 					body: tableBody,
 					headStyles: { fillColor: [52, 152, 219] },
 					columnStyles: {
-						1: { cellWidth: 40 }
+						1: { cellWidth: 40 }  // extra width for description column
 					},
 					theme: 'striped'
 				});
 
 				const fY = doc.lastAutoTable.finalY + 10;
-
-				// Calculate CGST/SGST percentages for display
-				let cgstPercent = 0, sgstPercent = 0;
-				if (itemsArray.length > 0) {
-					const totalTaxable = itemsArray.reduce((sum, item) => sum + (item.price * item.qty || 0), 0);
-					if (totalTaxable > 0) {
-						const totalGstPercent = itemsArray.reduce((sum, item) => sum + ((item.gstP || 0) * (item.price * item.qty || 0)), 0);
-						const avgGstPercent = totalGstPercent / totalTaxable;
-						cgstPercent = avgGstPercent / 2;
-						sgstPercent = avgGstPercent / 2;
-					}
-				}
-
 				doc.setFont(undefined, 'bold');
 				doc.text(`Subtotal: ${inv.subtotal}`, 140, fY);
-				doc.text(`CGST (${cgstPercent.toFixed(2)}%): ${inv.cgst || '₹0.00'}`, 140, fY + 7);
-				doc.text(`SGST (${sgstPercent.toFixed(2)}%): ${inv.sgst || '₹0.00'}`, 140, fY + 14);
-				doc.setTextColor(231, 76, 60);
-				doc.text(`Total Payable: ${inv.total}`, 140, fY + 22);
+				doc.text(`GST Total: ${inv.gstAmt}`, 140, fY + 7);
+				doc.setTextColor(231, 76, 60); doc.text(`Total Payable: ${inv.total}`, 140, fY + 15);
 				const pageHeight = doc.internal.pageSize.height;
 				doc.setFontSize(8); doc.setTextColor(150);
 				doc.text("Thank you for your business!", 105, pageHeight - 15, { align: 'center' });
@@ -731,31 +700,9 @@
 			const inv = invoiceHistory.find(x => x.invNo.toString() === no.toString());
 			if (inv) {
 				let currentItems = inv.items;
-				if (typeof currentItems === 'string') {
-					try { currentItems = JSON.parse(currentItems); }
-					catch (e) { console.error("JSON Error:", e); return alert("Items list-la error machi!"); }
-				}
-
-				// Calculate CGST and SGST from items if not present in stored data
-				let cgstValue = inv.cgst || '₹0.00';
-				let sgstValue = inv.sgst || '₹0.00';
-
-				// If old invoice or missing CGST/SGST - calculate from items
-				if (!inv.cgst || inv.cgst === '₹0.00' || inv.cgst === '₹0.00') {
-					const totalGst = currentItems.reduce((sum, item) => sum + (item.gstAmt || 0), 0);
-					cgstValue = `₹${(totalGst / 2).toFixed(2)}`;
-					sgstValue = `₹${(totalGst / 2).toFixed(2)}`;
-				}
-
-				generatePDF({
-					...inv,
-					items: currentItems,
-					cgst: cgstValue,
-					sgst: sgstValue
-				});
-			} else {
-				alert("Invoice #" + no + " kandupudikka mudiyala !");
-			}
+				if (typeof currentItems === 'string') { try { currentItems = JSON.parse(currentItems); } catch (e) { console.error("JSON Error:", e); return alert("Items list-la error machi!"); } }
+				generatePDF({ ...inv, items: currentItems });
+			} else { alert("Invoice #" + no + " kandupudikka mudiyala !"); }
 		}
 	</script>
 </body>
