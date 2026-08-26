@@ -151,18 +151,6 @@
 		.table th, .table td {
 			vertical-align: middle;
 		}
-
-		.bank-details {
-			font-size: 0.75rem;
-			color: #c8d6e5;
-			border-top: 1px solid #2c3e50;
-			padding-top: 12px;
-			margin-top: 12px;
-		}
-
-			.bank-details strong {
-				color: #fff;
-			}
 	</style>
 </head>
 <body>
@@ -291,20 +279,11 @@
 						<div class="total-box shadow">
 							<h5 class="mb-3 border-bottom pb-2 border-secondary">SUMMARY</h5>
 							<div class="d-flex justify-content-between mb-2"><span>Subtotal</span> <span id="lblSubtotal">₹0.00</span></div>
-							<div class="d-flex justify-content-between mb-2"><span>CGST</span> <span id="lblCGST">₹0.00</span></div>
-							<div class="d-flex justify-content-between mb-2"><span>SGST</span> <span id="lblSGST">₹0.00</span></div>
+							<div class="d-flex justify-content-between mb-2"><span>CGST (<span id="cgstPercent">0</span>%)</span> <span id="lblCGST">₹0.00</span></div>
+							<div class="d-flex justify-content-between mb-2"><span>SGST (<span id="sgstPercent">0</span>%)</span> <span id="lblSGST">₹0.00</span></div>
 							<hr>
 							<div class="d-flex justify-content-between mb-4"><span class="h5">Total Payable</span> <span class="h3 text-warning" id="lblGrandTotal">₹0.00</span></div>
 							<button class="btn btn-primary btn-lg w-100 fw-bold" id="btnSave" onclick="saveAndProcess()">Save & Print</button>
-							<div class="bank-details mt-3">
-								<strong>Bank Details:</strong><br>
-								Account Name: SKY ENTERPRISES<br>
-								Account Number: 389531234567899<br>
-								Branch: PUDUGUMMIDIPOONDI<br>
-								Account Type: Current Account<br>
-								IFSC Code: TMBL0000389<br>
-								MICR Code: 600060041
-							</div>
 						</div>
 					</div>
 				</div>
@@ -551,6 +530,15 @@
 			const cgst = totalGst / 2;
 			const sgst = totalGst / 2;
 
+			// Calculate weighted average GST percentage for display
+			let avgGstPercent = 0;
+			if (sub > 0) {
+				const totalGstPercent = currentBillItems.reduce((a, b) => a + (b.gstP * b.taxable), 0);
+				avgGstPercent = totalGstPercent / sub;
+			}
+
+			document.getElementById('cgstPercent').innerText = (avgGstPercent / 2).toFixed(2);
+			document.getElementById('sgstPercent').innerText = (avgGstPercent / 2).toFixed(2);
 			document.getElementById('lblSubtotal').innerText = `₹${sub.toFixed(2)}`;
 			document.getElementById('lblCGST').innerText = `₹${cgst.toFixed(2)}`;
 			document.getElementById('lblSGST').innerText = `₹${sgst.toFixed(2)}`;
@@ -635,7 +623,7 @@
 			}
 		}
 
-		// PDF GENERATION with Description/Note column and Bank Details
+		// PDF GENERATION with Description/Note column
 		function generatePDF(inv) {
 			const { jsPDF } = window.jspdf;
 			const doc = new jsPDF();
@@ -687,27 +675,24 @@
 
 				const fY = doc.lastAutoTable.finalY + 10;
 
+				// Calculate CGST/SGST percentages for display
+				let cgstPercent = 0, sgstPercent = 0;
+				if (itemsArray.length > 0) {
+					const totalTaxable = itemsArray.reduce((sum, item) => sum + (item.price * item.qty || 0), 0);
+					if (totalTaxable > 0) {
+						const totalGstPercent = itemsArray.reduce((sum, item) => sum + ((item.gstP || 0) * (item.price * item.qty || 0)), 0);
+						const avgGstPercent = totalGstPercent / totalTaxable;
+						cgstPercent = avgGstPercent / 2;
+						sgstPercent = avgGstPercent / 2;
+					}
+				}
+
 				doc.setFont(undefined, 'bold');
 				doc.text(`Subtotal: ${inv.subtotal}`, 140, fY);
-				doc.text(`CGST: ${inv.cgst || '₹0.00'}`, 140, fY + 7);
-				doc.text(`SGST: ${inv.sgst || '₹0.00'}`, 140, fY + 14);
+				doc.text(`CGST (${cgstPercent.toFixed(2)}%): ${inv.cgst || '₹0.00'}`, 140, fY + 7);
+				doc.text(`SGST (${sgstPercent.toFixed(2)}%): ${inv.sgst || '₹0.00'}`, 140, fY + 14);
 				doc.setTextColor(231, 76, 60);
 				doc.text(`Total Payable: ${inv.total}`, 140, fY + 22);
-
-				// Bank Details
-				const bankY = fY + 35;
-				doc.setTextColor(40, 40, 40);
-				doc.setFontSize(9);
-				doc.setFont(undefined, 'bold');
-				doc.text("Bank Details:", 15, bankY);
-				doc.setFont(undefined, 'normal');
-				doc.text("Account Name: SKY ENTERPRISES", 15, bankY + 6);
-				doc.text("Account Number: 389531234567899", 15, bankY + 12);
-				doc.text("Branch: PUDUGUMMIDIPOONDI", 15, bankY + 18);
-				doc.text("Account Type: Current Account", 15, bankY + 24);
-				doc.text("IFSC Code: TMBL0000389", 15, bankY + 30);
-				doc.text("MICR Code: 600060041", 15, bankY + 36);
-
 				const pageHeight = doc.internal.pageSize.height;
 				doc.setFontSize(8); doc.setTextColor(150);
 				doc.text("Thank you for your business!", 105, pageHeight - 15, { align: 'center' });
