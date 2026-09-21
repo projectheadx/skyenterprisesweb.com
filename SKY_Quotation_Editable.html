@@ -1,146 +1,353 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SKY Enterprises - Quotation QTN-SKY/027</title>
-<style>
-  @page { size: A4; margin: 0; }
-  * { box-sizing: border-box; }
-  body { margin:0; background:#e9e9e9; font-family: Arial, Helvetica, sans-serif; color:#111; }
-  .toolbar {
-    position:sticky; top:0; z-index:10; padding:10px 14px; background:#222; color:#fff;
-    display:flex; gap:8px; align-items:center; flex-wrap:wrap;
-  }
-  .toolbar button { border:0; padding:9px 14px; border-radius:5px; cursor:pointer; font-weight:700; }
-  .toolbar .print { background:#f4b400; color:#111; }
-  .toolbar .reset { background:#ddd; color:#111; }
-  .toolbar small { opacity:.85; margin-left:4px; }
-  .page {
-    width:210mm; min-height:297mm; margin:18px auto; background:#fff;
-    padding:0 0 12mm 0; box-shadow:0 2px 15px rgba(0,0,0,.18);
-  }
-  .header {
-    height:58mm; margin:0; padding:7mm 10mm 6mm 10mm; position:relative;
-    background:#15232c; border:1px solid #355b78; color:#fff; text-align:center;
-  }
-  .logo {
-    position:absolute; left:10.5mm; top:5.5mm; width:25mm; height:25mm;
-    object-fit:contain;
-  }
-  .company { font-size:22pt; line-height:1.1; margin-top:1.5mm; font-weight:400; }
-  .subtitle { font-size:11pt; margin-top:2mm; }
-  .addr { font-size:10.5pt; margin-top:1.8mm; }
-  .contact { font-size:10.5pt; margin-top:3mm; }
-  .email { font-size:10.5pt; margin-top:1.8mm; }
-  .gst { font-size:11pt; font-weight:700; margin-top:3.8mm; }
-  .content { width:174mm; margin:4mm auto 0; }
-  .quote-meta {
-    display:grid; grid-template-columns:1.45fr 1.75fr .8fr 1.5fr;
-    border:1px solid #888; background:#d6d6d6; min-height:10.5mm;
-  }
-  .quote-meta > div {
-    border-right:1px solid #888; display:flex; align-items:center;
-    padding:2.4mm 2.5mm; font-size:11pt; font-weight:700;
-  }
-  .quote-meta > div:last-child { border-right:0; }
-  .section { margin-top:11mm; font-size:11pt; line-height:1.35; }
-  .section p { margin:0 0 5.2mm; }
-  .label { font-weight:700; }
-  .intro { margin-top:2mm; }
-  table {
-    width:100%; border-collapse:collapse; table-layout:fixed; margin-top:5mm;
-    font-size:11pt;
-  }
-  th, td { border:1px solid #888; padding:2.6mm 2.5mm; vertical-align:middle; }
-  th { background:#3e96d0; color:#fff; font-weight:700; text-align:left; }
-  th:nth-child(1) { width:8%; } th:nth-child(2) { width:25%; }
-  th:nth-child(3) { width:20%; } th:nth-child(4) { width:23%; } th:nth-child(5) { width:24%; }
-  td { height:14mm; }
-  .after-table { margin-top:4.2mm; }
-  .notes { margin-top:6mm; }
-  .notes p { margin:0 0 2.5mm; }
-  .closing { margin-top:6mm; }
-  .thanks { margin-top:6mm; font-weight:700; }
-  .footer { text-align:center; margin-top:9mm; font-size:11pt; }
-  [contenteditable="true"] { outline:none; }
-  [contenteditable="true"]:focus { background:#fff7c7; box-shadow:0 0 0 1px #f0b400 inset; }
-  .edit-hint { font-size:12px; color:#ddd; }
-  @media print {
-    body { background:#fff; }
-    .toolbar { display:none !important; }
-    .page { margin:0; box-shadow:none; width:210mm; min-height:297mm; }
-    [contenteditable="true"]:focus { background:transparent; box-shadow:none; }
-  }
-</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>SKY Enterprises - Quotation QTN-SKY/027</title>
+	<style>
+		@page {
+			size: A4;
+			margin: 0;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			background: #e9e9e9;
+			font-family: Arial, Helvetica, sans-serif;
+			color: #111;
+		}
+
+		.toolbar {
+			position: sticky;
+			top: 0;
+			z-index: 10;
+			padding: 10px 14px;
+			background: #222;
+			color: #fff;
+			display: flex;
+			gap: 8px;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+
+			.toolbar button {
+				border: 0;
+				padding: 9px 14px;
+				border-radius: 5px;
+				cursor: pointer;
+				font-weight: 700;
+			}
+
+			.toolbar .print {
+				background: #f4b400;
+				color: #111;
+			}
+
+			.toolbar .reset {
+				background: #ddd;
+				color: #111;
+			}
+
+			.toolbar small {
+				opacity: .85;
+				margin-left: 4px;
+			}
+
+		.page {
+			width: 210mm;
+			min-height: 297mm;
+			margin: 18px auto;
+			background: #fff;
+			padding: 0 0 12mm 0;
+			box-shadow: 0 2px 15px rgba(0,0,0,.18);
+		}
+
+		.header {
+			height: 58mm;
+			margin: 0;
+			padding: 7mm 10mm 6mm 10mm;
+			position: relative;
+			background: #15232c;
+			border: 1px solid #355b78;
+			color: #fff;
+			text-align: center;
+		}
+
+		.logo {
+			position: absolute;
+			left: 10.5mm;
+			top: 5.5mm;
+			width: 25mm;
+			height: 25mm;
+			object-fit: contain;
+		}
+
+		.company {
+			font-size: 22pt;
+			line-height: 1.1;
+			margin-top: 1.5mm;
+			font-weight: 400;
+		}
+
+		.subtitle {
+			font-size: 11pt;
+			margin-top: 2mm;
+		}
+
+		.addr {
+			font-size: 10.5pt;
+			margin-top: 1.8mm;
+		}
+
+		.contact {
+			font-size: 10.5pt;
+			margin-top: 3mm;
+		}
+
+		.email {
+			font-size: 10.5pt;
+			margin-top: 1.8mm;
+		}
+
+		.gst {
+			font-size: 11pt;
+			font-weight: 700;
+			margin-top: 3.8mm;
+		}
+
+		.content {
+			width: 174mm;
+			margin: 4mm auto 0;
+		}
+
+		.quote-meta {
+			display: grid;
+			grid-template-columns: 1.45fr 1.75fr .8fr 1.5fr;
+			border: 1px solid #888;
+			background: #d6d6d6;
+			min-height: 10.5mm;
+		}
+
+			.quote-meta > div {
+				border-right: 1px solid #888;
+				display: flex;
+				align-items: center;
+				padding: 2.4mm 2.5mm;
+				font-size: 11pt;
+				font-weight: 700;
+			}
+
+				.quote-meta > div:last-child {
+					border-right: 0;
+				}
+
+		.section {
+			margin-top: 11mm;
+			font-size: 11pt;
+			line-height: 1.35;
+		}
+
+			.section p {
+				margin: 0 0 5.2mm;
+			}
+
+		.label {
+			font-weight: 700;
+		}
+
+		.intro {
+			margin-top: 2mm;
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			table-layout: fixed;
+			margin-top: 5mm;
+			font-size: 11pt;
+		}
+
+		th, td {
+			border: 1px solid #888;
+			padding: 2.6mm 2.5mm;
+			vertical-align: middle;
+		}
+
+		th {
+			background: #3e96d0;
+			color: #fff;
+			font-weight: 700;
+			text-align: left;
+		}
+
+			th:nth-child(1) {
+				width: 8%;
+			}
+
+			th:nth-child(2) {
+				width: 25%;
+			}
+
+			th:nth-child(3) {
+				width: 20%;
+			}
+
+			th:nth-child(4) {
+				width: 23%;
+			}
+
+			th:nth-child(5) {
+				width: 24%;
+			}
+
+		td {
+			height: 14mm;
+		}
+
+		.after-table {
+			margin-top: 4.2mm;
+		}
+
+		.notes {
+			margin-top: 6mm;
+		}
+
+			.notes p {
+				margin: 0 0 2.5mm;
+			}
+
+		.closing {
+			margin-top: 6mm;
+		}
+
+		.thanks {
+			margin-top: 6mm;
+			font-weight: 700;
+		}
+
+		.footer {
+			text-align: center;
+			margin-top: 9mm;
+			font-size: 11pt;
+		}
+
+		[contenteditable="true"] {
+			outline: none;
+		}
+
+			[contenteditable="true"]:focus {
+				background: #fff7c7;
+				box-shadow: 0 0 0 1px #f0b400 inset;
+			}
+
+		.edit-hint {
+			font-size: 12px;
+			color: #ddd;
+		}
+
+		@media print {
+			* {
+				-webkit-print-color-adjust: exact !important;
+				print-color-adjust: exact !important;
+			}
+
+			body {
+				background: #fff;
+			}
+
+			.toolbar {
+				display: none !important;
+			}
+
+			.page {
+				margin: 0;
+				box-shadow: none;
+				width: 210mm;
+				min-height: 297mm;
+			}
+
+			[contenteditable="true"]:focus {
+				background: transparent;
+				box-shadow: none;
+			}
+		}
+	</style>
 </head>
 <body>
-<div class="toolbar">
-  <button class="print" onclick="window.print()">Download / Save as PDF</button>
-  <button class="reset" onclick="location.reload()">Reset</button>
-  <span class="edit-hint">Click any text or table cell to edit. Then click Download / Save as PDF → choose “Save as PDF”.</span>
-</div>
+	<div class="toolbar">
+		<button class="print" onclick="window.print()">Download PDF</button>
+		<button class="reset" onclick="location.reload()">Reset</button>
+		<span class="edit-hint">Click any text or table cell to edit. Then click Download PDF. In the print window, choose “Save as PDF” and enable “Background graphics”.</span>
+	</div>
 
-<div class="page">
-  <header class="header">
-    <img class="logo"
-         src="https://www.skyenterprisesweb.com/img/logo.png"
-         onerror="this.src='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QA6RXhpZgAATU0AKgAAAAgAA1EQAAEAAAABAQAAAFERAAQAAAABAAAOxFESAAQAAAABAAAOxAAAAAD/2wBDAA0JCgsKCA0LCwsPDg0QFCEVFBISFCgdHhghMCoyMS8qLi00O0tANDhHOS0uQllCR05QVFVUMz9dY1xSYktTVFH/2wBDAQ4PDxQRFCcVFSdRNi42UVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVH/wAARCABaAFoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDzCiit/wALeGpdcnaWUtDYQn97KByT/dX1b+VJtJXY0r6Iz9J0e/1m4MNjAZNvLueFQerE8Cuz03wHZQqralcSXEvBMcB2oPYkjJ/DH1rqLa3t7K1S1tIVggXoq9/cnufc1JjNeJXzOV7UtF3O2lg761Cva6fp9mMWmm2kIwBnywzcf7RyatxTSQw+TEFjixjYigDHTpUeCelLtf0Nef7es18T+86lRpr7KIrm1s7yF4rmztpVcYO6IA/gQAR+FYmo+C9GvFY2ySWMp5yjF0z6bTyPwNdAQR1GKKuGNrwfxffqTLC0pbK3oeWa54X1HRgZZFE9r/z8Q5Kj2P8AdPsaxK9uDEBlYKysu1lZcqw9CO4rz7xZ4WTT0N/p4c2xb54+vk9Mc9SM9+3APOM+3hMZHEe69JdjhrUHS13RyVFFFdxzl7RtMm1fVIbKH5TIfmfGQi92PsBXrsNvb2lrFaWcfl28K7UHc+pPueprlvh5YLDplxqTKfMncwxkjoowSR9Scfga6PULk2enz3A5MaEj69v1rxcxquU1Qj/TO3CQ0dRle91eG3uktIka4u3OBGh6fU9qvru2Dfjdjnb0rkPBwE2pXM8p3ShM5PXk8mu2hg81WdpI441wC8jYGT2rjr4fkqKjTV2dNOrePtJaIsm9XSdH+2+QZSWCtjPygnGTgE4HU4BqOPxP597DZRW0bTzRpJH/AKQNrBt2cMAegUmtGKwiktY4Llg+1/MjKOVIPqCCD3P50xfD2lKV22gXbtC4Zht2klSOeCCTz7n1r38PHkpRi1bQ8yo+abZDpupnV/NhkszEIgVm3NkxybiNnTk4AOR6j1rMI5yK6CC1t4jdGzwsk0haU7i3z4HJGeDjH6VmXWmy28RkLKyjrjtXnZlSlO0ora9zqwk1G6b3MBNYjjvjY3ifZ5j9xs5Rx2wa0+MEFVZGBVlYZBB6giuZ8aojWltN/GHKj6Ef/WFaPh28e+0eN5DukQmNj64/+tiuKpRSpRrw07+vkdUZ++6cjifGmhppOpLNbALaXWXjUfwEH5l/DIx7EVzleva9YJqmg3du6kyJG00O0ZO9QTj8eRXkNe5ha3tqSk9+p5dSm6UnA9k0qJbfRdOgQqypbRkMq4B3DcePxqLW4Wn0e6jUZbyyQPXHP9K0p4ooZRFDjyowETHTAHHSmd6+erVH9Yc+z/U9Wmk6SXkebaRqD6bfpcKMr9119Vr0S0u7DVLBo1mcxO6SboiA6lTkAg9K5PXPDUqStcWCeZExyYh1X6eornQZYJOC8bj6givc5YYlqtRlaS/rVHBeVNOnNXR6i2naaXd/OvN77ssNgPzFie3+1+QApsumaa5QCS5VFWRWxt3ndtx83ttP5n6HnND07VJkWe9vrmKHqsfmHcw9/QVY1LxLaWeYbcfaJBxnPyj8e9c0q+Jc/Z02pPyRqqVLl5pKxvy6dpUrMfNvUBP3UKqB04xj/Z/U+tSPcWOn6fcoksgSaQys0zD5SccD8q85uvEOp3JP+kGJf7sXy/r1rOkmmnbMsjyN6sxJrpVHEVI8tSSSfZGPNSi7xTNPxDqo1O8HlZEEXCZ7+prpPCMLRaKGYY8yRnH04H9KwNI8OXV7IslwjQW/Ulhhm+g/rXbxIkUSxxqFRBhQOwrix1WnCksPT6HTh4TlJ1JksTmORHHVSDXmmq+GblNWvEiGY1ncIcdtxxXpVTyaDoU0jSzC381yWfITOT17Vpk8o2mpeRy5o5R5ZQKdpcR3mn2tzE4dZIUOR6gAEfgQRT2UsjKGKkjAYdR71g+BtQF74dS2ZiZbNyhz12HJXH0OR+VdBXm42DhXlb1+878LJSpJLpocrFD4i0y7YR5vYmbOWbIP5nINb6qssCz31rDHInzHcQ+zHfOKtnJqlqts11pdxAv32Q7fcjkU5V/bSXMkvNFKnyJ218jlNe8QSXrNb2rFLYcEjgyf/W9qy9P0661GXy7aPdj7zHhV+pqfRtJl1O78vlIk5kb09vrXS6nqtroNutlZRqZgPu9l929TXsyqLD2oYdXl/WrOFRdT95UehDb+GtPs4hLqNwHx1y2xP8TWppy6c0Dy6XBCxQlchduTjOMkZ71wV1d3N9N5k8rSueme3sBXb+GLOSz0hRKpR5GLlSMEdh+grkxlKdOnzVZ3b6dDahOMpWhGyM+/HiLUJvIWAWsOeSsg/Vuv5V0NnDJBaRxSzNM6jDO3UmphkDk0A15tWu5xUFFJLsdUYcrbvccqlmCjqTiuK1XxRCmrXiRsros7hWU5BG44INdfeXqabYXOoSEAQRllHq/8I/E4rxh3Z3Z3YszHJJOSTXsZTFwhKouv6Hl5hCFeShNbGz4T1r+xdYWST/j1nHlTj0QkfMPcda9T4+V0YOjAMrA5DKehHtXiNdd4P8TCyCaZfMTbM48uQtxDnr+GTk88ckc8HbGYT6xG8fiWw6Fb2T12Z6BRR/CGVlZGAZWU5BB6EGivmmmnZnrp3MvVbmHRtPmnhjVZJW4AH3nPc/lXBxR3F/eBFzJNK3fufWul8bF9tmv8HzH8eKXwfaJFbz6jLgYyqk9gOSf8+le7hpLD4V1t5P8A4ZHBVTqVeTojV0fRbbTIgcLJckfNIR/L0FamcVyuhajPqPiSaYk+WYmAXsq5GK6uvMxcKkan7x3b1OmjKLj7q0CgDPAoAzwK57xT4lXRVa0tGR79lIJBz5Gcdf8Aa6/TjrniMNhp15csQrVlRV3uY3xB1YSXC6PC4ZICHm4IIk5GM+wPp1Jri6c7tI7O7FnY5Zickn1ptfVQgoRUI7I8dtt3e7CiiiqA6Lw94sutIxBOrXdngARu5zGM/wAB7dTx0Nd1Y69o+owGSG/iiYDLR3DiNl/E8H8M15HRXNWwtKvrNa9y6dSdN3iz2jUdOju7c293EwXORkYIPqKqxaXHDo7adHK4RlZd/GeT/wDXrhfDOrakkogXUbpYVxiMTMFH4Zr1jTWZ9JuXdizruwxOSPlrgeClGKSnpe+xu8YuazjqYmlaRb6chS2RmdvvMeWNS6je2elwmS/uEhPJEefnYgE4C++PYdOea5LxbqV+tq0QvrkRtwyiVsEe4zXEO7yOXdizHksxyTWscujJ89WTZEcbKStBWOx1nx1NIGh0dGt0IH79x+8B5zjBwO3v15rjndpHZ3Ys7HJZjkk+tNor0IQjTXLFWRi227vcKKKKsR//2Q=='"
-         alt="SKY Enterprises Logo">
-    <div class="company" contenteditable="true">SKY ENTERPRISES</div>
-    <div class="subtitle" contenteditable="true">Construction Materials Supplier</div>
-    <div class="addr" contenteditable="true">K,S Road, Kavaraipettai,Gummidipoondi TK,Tiruvallur DT, Pin-601206.</div>
-    <div class="contact" contenteditable="true">Near TJS Petrol Bunk Contact: 73739 19373 | www.skyenterprisesweb.com</div>
-    <div class="email" contenteditable="true">Email: munusamy@skyenterprisesweb.com</div>
-    <div class="gst" contenteditable="true">GST : 33DBYPM6097M1ZJ</div>
-  </header>
+	<div class="page">
+		<header class="header">
+			<img class="logo"
+				 src="https://www.skyenterprisesweb.com/img/logo.png"
+				 onerror="this.src='data:image/jpeg;base64,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'"
+				 alt="SKY Enterprises Logo">
+			<div class="company" contenteditable="true">SKY ENTERPRISES</div>
+			<div class="subtitle" contenteditable="true">Construction Materials Supplier</div>
+			<div class="addr" contenteditable="true">K,S Road, Kavaraipettai,Gummidipoondi TK,Tiruvallur DT, Pin-601206.</div>
+			<div class="contact" contenteditable="true">Near TJS Petrol Bunk Contact: 73739 19373 | www.skyenterprisesweb.com</div>
+			<div class="email" contenteditable="true">Email: munusamy@skyenterprisesweb.com</div>
+			<div class="gst" contenteditable="true">GST : 33DBYPM6097M1ZJ</div>
+		</header>
 
-  <main class="content">
-    <div class="quote-meta">
-      <div>QUOTATION NO:</div><div contenteditable="true">QTN-SKY/027</div>
-      <div>DATE:</div><div contenteditable="true">14/07/2026</div>
-    </div>
+		<main class="content">
+			<div class="quote-meta">
+				<div>QUOTATION NO:</div><div contenteditable="true">QTN-SKY/027</div>
+				<div>DATE:</div><div contenteditable="true">14/07/2026</div>
+			</div>
 
-    <section class="section">
-      <p><span class="label">Company:</span> <span contenteditable="true">Kavin Groups</span></p>
-      <p><span class="label">Kind Attention:</span> <span contenteditable="true">Mr. Vijay</span></p>
-      <p style="margin-top:10mm;"><span class="label">Subject:</span> <span contenteditable="true">Quotation for Steel Supply</span></p>
-      <p>Dear Sir,</p>
-      <p class="intro">We are pleased to submit our quotation for the supply of <b contenteditable="true">TMT Steel Bars</b> as per your requirement. Kindly find the details below for your reference and consideration.</p>
+			<section class="section">
+				<p><span class="label">Company:</span> <span contenteditable="true">Kavin Groups</span></p>
+				<p><span class="label">Kind Attention:</span> <span contenteditable="true">Mr. Vijay</span></p>
+				<p style="margin-top:10mm;"><span class="label">Subject:</span> <span contenteditable="true">Quotation for Steel Supply</span></p>
+				<p>Dear Sir,</p>
+				<p class="intro">We are pleased to submit our quotation for the supply of <b contenteditable="true">TMT Steel Bars</b> as per your requirement. Kindly find the details below for your reference and consideration.</p>
 
-      <table>
-        <thead>
-          <tr>
-            <th>S.No</th><th>Material</th><th>Grade</th><th>Unit</th><th>Rate (Rs)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td contenteditable="true">1</td>
-            <td contenteditable="true">TMT Steel Bar</td>
-            <td contenteditable="true">20mm – Fe<br>550D</td>
-            <td contenteditable="true">1 Kg</td>
-            <td contenteditable="true">60.00</td>
-          </tr>
-        </tbody>
-      </table>
+				<table>
+					<thead>
+						<tr>
+							<th>S.No</th>
+							<th>Material</th>
+							<th>Grade</th>
+							<th>Unit</th>
+							<th>Rate (Rs)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td contenteditable="true">1</td>
+							<td contenteditable="true">TMT Steel Bar</td>
+							<td contenteditable="true">20mm – Fe<br>550D</td>
+							<td contenteditable="true">1 Kg</td>
+							<td contenteditable="true">60.00</td>
+						</tr>
+					</tbody>
+				</table>
 
-      <p class="after-table">We assure you of the best quality materials, timely delivery, and competitive pricing. We look forward to your valuable order.</p>
-      <p>Thank you for your consideration.</p>
+				<p class="after-table">We assure you of the best quality materials, timely delivery, and competitive pricing. We look forward to your valuable order.</p>
+				<p>Thank you for your consideration.</p>
 
-      <div class="notes">
-        <p>1. <span contenteditable="true">The quoted prices are subject to change based on prevailing market conditions.</span></p>
-        <p>2. <span contenteditable="true">Payment should be made within 10 days from the date of invoice submission.</span></p>
-        <p>3. <span contenteditable="true">Amount mentioned above is excluding GST.</span></p>
-        <p>4. <span contenteditable="true">GST @ 5% will be charged extra as applicable.</span></p>
-        <p>5. <span contenteditable="true">Quotation validity: 7 Days from the date of issue</span></p>
-      </div>
+				<div class="notes">
+					<p>1. <span contenteditable="true">The quoted prices are subject to change based on prevailing market conditions.</span></p>
+					<p>2. <span contenteditable="true">Payment should be made within 10 days from the date of invoice submission.</span></p>
+					<p>3. <span contenteditable="true">Amount mentioned above is excluding GST.</span></p>
+					<p>4. <span contenteditable="true">GST @ 5% will be charged extra as applicable.</span></p>
+					<p>5. <span contenteditable="true">Quotation validity: 7 Days from the date of issue</span></p>
+				</div>
 
-      <p class="closing">We look forward to your valuable order and assure you of our best service at all times.</p>
-      <p class="thanks">Thanks &amp; regards,<br><span contenteditable="true">SKY ENTERPRISES</span></p>
-      <div class="footer">Thank you for your business!</div>
-    </section>
-  </main>
-</div>
+				<p class="closing">We look forward to your valuable order and assure you of our best service at all times.</p>
+				<p class="thanks">Thanks &amp; regards,<br><span contenteditable="true">SKY ENTERPRISES</span></p>
+				<div class="footer">Thank you for your business!</div>
+			</section>
+		</main>
+	</div>
 </body>
 </html>
