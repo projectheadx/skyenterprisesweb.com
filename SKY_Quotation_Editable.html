@@ -47,6 +47,16 @@
 				color: #111;
 			}
 
+			.toolbar .share {
+				background: #25D366;
+				color: #fff;
+			}
+
+			.toolbar .email {
+				background: #4285f4;
+				color: #fff;
+			}
+
 			.toolbar .reset {
 				background: #ddd;
 				color: #111;
@@ -62,11 +72,13 @@
 			min-height: 297mm;
 			margin: 18px auto;
 			background: #fff;
-			padding: 0 0 12mm 0;
+			padding: 0;
 			box-shadow: 0 2px 15px rgba(0,0,0,.18);
+			box-sizing: border-box;
 		}
 
 		.header {
+			width: 100%;
 			height: 58mm;
 			margin: 0;
 			padding: 7mm 10mm 6mm 10mm;
@@ -208,6 +220,20 @@
 			height: 14mm;
 		}
 
+		.table-tools {
+			margin-top: 3mm;
+			display: flex;
+			gap: 7px;
+		}
+
+			.table-tools button {
+				border: 1px solid #999;
+				background: #eee;
+				padding: 6px 10px;
+				border-radius: 4px;
+				cursor: pointer;
+			}
+
 		.after-table {
 			margin-top: 4.2mm;
 		}
@@ -268,6 +294,7 @@
 				box-shadow: none;
 				width: 210mm;
 				min-height: 297mm;
+				padding: 0;
 			}
 
 			[contenteditable="true"]:focus {
@@ -279,9 +306,11 @@
 </head>
 <body>
 	<div class="toolbar">
-		<button class="print" onclick="window.print()">Download PDF</button>
+		<button class="print" onclick="downloadPDF()">Download PDF</button>
+		<button class="share" onclick="sharePDF()">Share PDF</button>
+		<button class="email" onclick="emailPDF()">Email PDF</button>
 		<button class="reset" onclick="location.reload()">Reset</button>
-		<span class="edit-hint">Click any text or table cell to edit. Then click Download PDF. In the print window, choose “Save as PDF” and enable “Background graphics”.</span>
+		<span class="edit-hint">Edit the quotation, then download or share the PDF.</span>
 	</div>
 
 	<div class="page">
@@ -331,6 +360,10 @@
 						</tr>
 					</tbody>
 				</table>
+				<div class="table-tools no-print">
+					<button type="button" onclick="addRow()">+ Add Row</button>
+					<button type="button" onclick="removeRow()">− Remove Last Row</button>
+				</div>
 
 				<p class="after-table">We assure you of the best quality materials, timely delivery, and competitive pricing. We look forward to your valuable order.</p>
 				<p>Thank you for your consideration.</p>
@@ -349,5 +382,208 @@
 			</section>
 		</main>
 	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<script>function addRow() {
+  const tbody = document.querySelector("table tbody");
+  const row = tbody.insertRow();
+  const values = ["", "", "", "", ""];
+  values.forEach((v, i) => {
+    const cell = row.insertCell();
+    cell.contentEditable = "true";
+    cell.innerText = v;
+    if (i === 0) cell.innerText = tbody.rows.length;
+  });
+  renumberRows();
+}
+
+function removeRow() {
+  const tbody = document.querySelector("table tbody");
+  if (tbody.rows.length <= 1) {
+    alert("At least one material row must remain.");
+    return;
+  }
+  tbody.deleteRow(tbody.rows.length - 1);
+  renumberRows();
+}
+
+function renumberRows() {
+  document.querySelectorAll("table tbody tr").forEach((row, index) => {
+    row.cells[0].innerText = index + 1;
+  });
+}
+
+async function buildPDFBlob() {
+  const original = document.querySelector(".page");
+  const source = original.cloneNode(true);
+
+  // Remove every editing/control element from the exported PDF.
+  source.querySelectorAll(".toolbar, .table-tools, .no-print").forEach(el => el.remove());
+  source.querySelectorAll("[contenteditable]").forEach(el => {
+    el.removeAttribute("contenteditable");
+    el.style.outline = "none";
+    el.style.boxShadow = "none";
+    el.style.background = "transparent";
+  });
+
+  // Force exact A4 geometry: no left/right white strip.
+  source.style.width = "210mm";
+  source.style.height = "auto";
+  source.style.minHeight = "0";
+  source.style.margin = "0";
+  source.style.padding = "0";
+  source.style.boxShadow = "none";
+  source.style.overflow = "visible";
+  source.style.background = "#fff";
+  source.querySelector(".header").style.width = "100%";
+
+  const wrapper = document.createElement("div");
+  wrapper.style.position = "fixed";
+  wrapper.style.left = "-100000px";
+  wrapper.style.top = "0";
+  wrapper.style.width = "210mm";
+  wrapper.style.margin = "0";
+  wrapper.style.padding = "0";
+  wrapper.style.background = "#fff";
+  wrapper.style.overflow = "visible";
+  wrapper.appendChild(source);
+  document.body.appendChild(wrapper);
+
+  try {
+    // Wait for layout/images before measuring.
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    const logo = source.querySelector(".logo");
+    if (logo && !logo.complete) {
+      await new Promise(resolve => {
+        logo.onload = resolve;
+        logo.onerror = resolve;
+      });
+    }
+
+    // If content is slightly taller than A4, scale the whole quotation down
+    // so the generated PDF is ALWAYS exactly one page.
+    const pxPerMm = 96 / 25.4;
+    const a4HeightPx = 297 * pxPerMm;
+    const a4WidthPx = 210 * pxPerMm;
+
+    let naturalHeight = source.scrollHeight;
+    let scale = Math.min(1, a4HeightPx / naturalHeight);
+
+    source.style.transformOrigin = "top left";
+    source.style.transform = `scale(${scale})`;
+    source.style.width = "210mm";
+
+    const canvas = await html2canvas(source, {
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: "#ffffff",
+      logging: false,
+      width: a4WidthPx,
+      windowWidth: a4WidthPx
+    });
+
+    const pdf = new jspdf.jsPDF({
+      unit: "mm",
+      format: "a4",
+      orientation: "portrait",
+      compress: true
+    });
+
+    const imgData = canvas.toDataURL("image/jpeg", 0.98);
+
+    // Keep the whole quotation on one A4 page.
+    let imgW = 210;
+    let imgH = (canvas.height / canvas.width) * imgW;
+
+    if (imgH > 297) {
+      const fit = 297 / imgH;
+      imgW *= fit;
+      imgH *= fit;
+    }
+
+    const x = (210 - imgW) / 2;
+    const y = 0;
+    pdf.addImage(imgData, "JPEG", x, y, imgW, imgH, undefined, "FAST");
+
+    return pdf.output("blob");
+  } finally {
+    wrapper.remove();
+  }
+}
+
+async function downloadPDF() {
+  try {
+    const blob = await buildPDFBlob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "SKY_Quotation.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  } catch (e) {
+    alert("PDF generation failed. Please try again.");
+    console.error(e);
+  }
+}
+
+async function sharePDF() {
+  try {
+    const blob = await buildPDFBlob();
+    const file = new File([blob], "SKY_Quotation.pdf", { type: "application/pdf" });
+
+    if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
+      await navigator.share({
+        title: "SKY Enterprises Quotation",
+        text: "Quotation from SKY ENTERPRISES",
+        files: [file]
+      });
+    } else {
+      const url = URL.createObjectURL(blob);
+      const waText = encodeURIComponent("SKY ENTERPRISES - Quotation. Please find the PDF.");
+      window.open("https://wa.me/?text=" + waText, "_blank");
+      alert("Your browser cannot attach a PDF directly to WhatsApp. The PDF is ready; download it and attach it in WhatsApp.");
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+    }
+  } catch (e) {
+    if (e.name !== "AbortError") {
+      alert("PDF sharing was not completed. Please download the PDF and attach it.");
+      console.error(e);
+    }
+  }
+}
+
+async function emailPDF() {
+  try {
+    const blob = await buildPDFBlob();
+    const file = new File([blob], "SKY_Quotation.pdf", { type: "application/pdf" });
+
+    // On supported devices, the native share sheet can pass the actual PDF
+    // to a mail app with the PDF attached.
+    if (navigator.share && (!navigator.canShare || navigator.canShare({ files: [file] }))) {
+      await navigator.share({
+        title: "SKY Enterprises Quotation",
+        text: "Please find the SKY ENTERPRISES quotation attached.",
+        files: [file]
+      });
+    } else {
+      window.location.href =
+        "mailto:?subject=" +
+        encodeURIComponent("SKY ENTERPRISES - Quotation") +
+        "&body=" +
+        encodeURIComponent("Please find the SKY ENTERPRISES quotation attached.");
+      alert("Desktop browsers cannot attach a generated PDF through mailto automatically. Download the PDF and attach it to the email.");
+    }
+  } catch (e) {
+    if (e.name !== "AbortError") {
+      alert("Email sharing was not completed. Please download the PDF and attach it.");
+      console.error(e);
+    }
+  }
+}</script>
+
 </body>
 </html>
